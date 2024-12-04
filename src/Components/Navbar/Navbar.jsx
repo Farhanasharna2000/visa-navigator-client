@@ -1,10 +1,22 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { authContext } from "../AuthProvider/AuthProvider";
 import logo from "../../assets/logo .jpg"
+import { FiMoon, FiSun } from "react-icons/fi";
 const Navbar = () => {
   const { handleLogout, user } = useContext(authContext);
+  const [theme, setTheme] = useState(
+    localStorage.getItem('theme') || 'light'
+  );
 
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('theme', theme);
+  }, [theme]);
+
+  const toggleTheme = () => {
+    setTheme(theme === 'light' ? 'dark' : 'light');
+  };
 
   const links = (
     <>
@@ -58,7 +70,7 @@ const Navbar = () => {
           My Visa applications
         </NavLink>
       </li>
-      
+
       {
         user && (
           <li>
@@ -74,6 +86,7 @@ const Navbar = () => {
         )
       }
     </>
+
   );
 
   return (
@@ -112,37 +125,54 @@ const Navbar = () => {
             <ul className="menu menu-horizontal px-1">{links}</ul>
           </div>
           <div className="navbar-end">
-  {user?.email ? (
-    <div className="flex gap-3 items-center">
-      <div className="relative group">
-        <img
-          className="rounded-full w-12 h-12 border-2 border-gradient-to-r from-blue-500 to-purple-500 shadow-lg"
-          src={user?.photoURL || " "}
-          alt="User"
-        />
-        <div className="absolute top-14 left-1/2 transform -translate-x-1/2 w-40 p-3 bg-gradient-to-r from-blue-500 to-purple-500 rounded-lg shadow-xl opacity-0 group-hover:opacity-100 transition-all duration-500 ease-in-out scale-75 group-hover:scale-100">
-          <p className="text-white text-center font-semibold animate-bounce">
-            {user?.displayName || "Hello, User!"}
-          </p>
-         
-        </div>
-      </div>
-      <button
-        onClick={handleLogout}
-        className="btn bg-gradient-to-r from-blue-500 to-purple-500 text-white hover:shadow-lg hover:scale-105 transition-transform"
-      >
-        Logout
-      </button>
-    </div>
-  ) : (
-    <NavLink to="/login">
-      <button className="btn bg-gradient-to-r from-blue-500 to-purple-500 text-white hover:shadow-lg hover:scale-105 transition-transform">
-        Login
-      </button>
-    </NavLink>
-  )}
-</div>
+            {user?.email ? (
+              <div className="flex gap-3 items-center">
+                <div className="relative group">
+                  <img
+                    className="rounded-full w-12 h-12 border-2 border-gradient-to-r from-blue-500 to-purple-500 shadow-lg"
+                    src={user?.photoURL || " "}
+                    alt="User"
+                  />
+                  <div className="absolute top-14 left-1/2 transform -translate-x-1/2 w-40 p-3 bg-gradient-to-r from-blue-500 to-purple-500 rounded-lg shadow-xl opacity-0 group-hover:opacity-100 transition-all duration-500 ease-in-out scale-75 group-hover:scale-100">
+                    <p className="text-white text-center font-semibold animate-bounce">
+                      {user?.displayName || "Hello, User!"}
+                    </p>
 
+                  </div>
+                </div>
+                <button
+                  onClick={handleLogout}
+                  className="btn bg-gradient-to-r from-blue-500 to-purple-500 text-white hover:shadow-lg hover:scale-105 transition-transform"
+                >
+                  Logout
+                </button>
+              </div>
+            ) : (
+              <div className="flex gap-3">
+                <NavLink to="/login">
+                  <button className="btn bg-gradient-to-r from-blue-500 to-purple-500 text-white hover:shadow-lg hover:scale-105 transition-transform">
+                    Login
+                  </button>
+                </NavLink>
+                <NavLink to="/register">
+                  <button className="btn bg-gradient-to-r from-blue-500 to-purple-500 text-white hover:shadow-lg hover:scale-105 transition-transform">
+                    Register
+                  </button>
+                </NavLink>
+
+              </div>
+            )}
+          </div>
+          <button
+            onClick={toggleTheme}
+            className="btn btn-ghost rounded-full p-2 ml-3"
+          >
+            {theme === 'light' ? (
+              <FiMoon className="text-2xl" />
+            ) : (
+              <FiSun className="text-2xl text-yellow-300" />
+            )}
+          </button>
 
         </div>
       </div>

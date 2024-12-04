@@ -1,12 +1,197 @@
+import Swal from "sweetalert2";
 import Footer from "../Footer/Footer";
 import Navbar from "../Navbar/Navbar";
+import DatePicker from "react-datepicker";
+import { useState } from "react";
+import "react-datepicker/dist/react-datepicker.css";
 
 const AddVisa = () => {
+    const [startDate, setStartDate] = useState(new Date());
+    const handleSubmit = e => {
+        e.preventDefault()
+
+        const form = e.target;
+
+        const image = form.countryImage.value;
+        const name = form.countryName.value;
+        const visaType = form.visaType.value;
+        const processingTime = form.processingTime.value;
+        const description = form.description.value;
+        const age = form.ageRestriction.value;
+        const fee = form.fee.value;
+        const validity = startDate.toLocaleDateString("en-CA");
+        const method = form.applicationMethod.value;
+
+
+        const requiredDocuments = Array.from(
+            form.querySelectorAll('input[name="requiredDocuments"]:checked')
+        ).map(input => input.value);
+
+
+
+
+        const newData = { image, name, visaType, processingTime, description, age, fee, validity, method, requiredDocuments }
+
+
+        fetch("http://localhost:3000/visaData", {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(newData)
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+
+                if (data.insertedId) {
+                    Swal.fire('Data create successfully')
+                    form.reset();
+                    setStartDate(new Date());
+                }
+            })
+
+    }
     return (
         <div>
-            <Navbar/>
-            AddVisa
-            <Footer/>
+            <Navbar />
+
+            <div className="max-w-4xl mx-auto mt-10 p-6 bg-slate-100 rounded-lg shadow-md my-10">
+                <h1 className="text-2xl font-bold mb-5">Add Visa</h1>
+                <form onSubmit={handleSubmit}>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div >
+                        <label className="block font-bold">Country Image URL:</label>
+                        <input
+                            type="text"
+                            name="countryImage"
+                            className="w-full px-3 py-2 border rounded"
+                            placeholder="Enter image URL"
+                            required
+                        />
+                    </div>
+
+                    <div >
+                        <label className="block font-bold">Country Name:</label>
+                        <input
+                            type="text"
+                            name="countryName"
+                            className="w-full px-3 py-2 border rounded"
+                            required
+                        />
+                    </div>
+
+                    <div >
+                        <label className="block font-bold">Visa Type:</label>
+                        <select
+                            name="visaType"
+                            className="w-full px-3 py-2 border rounded"
+                        >
+                            <option selected>Select Visa Type</option>
+                            <option value="Tourist visa">Tourist visa</option>
+                            <option value="Student visa">Student visa</option>
+                            <option value="Official visa">Official visa</option>
+                        </select>
+                    </div>
+
+                    <div >
+                        <label className="block font-bold">Processing Time:</label>
+                        <input
+                            type="text"
+                            name="processingTime"
+                            className="w-full px-3 py-2 border rounded"
+                            required
+                        />
+                    </div>
+
+                    <div >
+                        <label className="block font-bold">Required Documents:</label>
+                        <div className="flex flex-wrap gap-2">
+                            <label>
+                                <input
+                                    type="checkbox"
+                                    name="requiredDocuments"
+                                    value="Valid passport"
+                                />{" "}
+                                Valid passport
+                            </label>
+                            <label>
+                                <input
+                                    type="checkbox"
+                                    name="requiredDocuments"
+                                    value="Visa application form"
+                                />{" "}
+                                Visa application form
+                            </label>
+                            <label>
+                                <input
+                                    type="checkbox"
+                                    name="requiredDocuments"
+                                    value="Recent passport-sized photograph"
+                                />{" "}
+                                Recent passport-sized photograph
+                            </label>
+                        </div>
+                    </div>
+
+                    <div >
+                        <label className="block font-bold">Description:</label>
+                        <textarea
+                            name="description"
+                            className="w-full px-3 py-2 border rounded"
+                            required
+                        ></textarea>
+                    </div>
+
+                    <div >
+                        <label className="block font-bold">Age Restriction:</label>
+                        <input
+                            type="number"
+                            name="ageRestriction"
+                            className="w-full px-3 py-2 border rounded"
+                        />
+                    </div>
+
+                    <div >
+                        <label className="block font-bold">Fee:</label>
+                        <input
+                            type="number"
+                            name="fee"
+                            className="w-full px-3 py-2 border rounded"
+                            required
+                        />
+                    </div>
+                    <div >
+                        <label className="block font-bold">Application Method:</label>
+                        <input
+                            type="text"
+                            name="applicationMethod"
+                            className="w-full px-3 py-2 border rounded"
+                            required
+                        />
+                    </div>
+                    <div className="mb-5 " >
+                        <label className="block font-bold">Validity:</label>
+                        <DatePicker
+                            className="input px-3 py-2 border rounded w-full"
+                            selected={startDate}
+                            onChange={(date) => setStartDate(date)}
+                        />
+                    </div>
+
+                 
+                    </div>
+
+
+                    <button
+                        type="submit"
+                        className="w-full bg-blue-500 text-white py-2 px-4 rounded"
+                    >
+                        Add Visa
+                    </button>
+                </form>
+            </div>
+            <Footer />
         </div>
     );
 };
