@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { NavLink } from "react-router-dom";
 import { authContext } from "../AuthProvider/AuthProvider";
+import logo from "../../assets/logo .jpg"
 const Navbar = () => {
   const { handleLogout, user } = useContext(authContext);
 
@@ -22,9 +23,9 @@ const Navbar = () => {
           className={({ isActive }) =>
             `font-bold ${isActive ? "bg-blue-800 text-white hover:text-black" : "hover:text-blue-600"}`
           }
-          to=""
+          to="/all-visas"
         >
-          Start Learning
+          All visas
         </NavLink>
       </li>
       <li>
@@ -32,9 +33,9 @@ const Navbar = () => {
           className={({ isActive }) =>
             `font-bold ${isActive ? "bg-blue-800 text-white hover:text-black" : "hover:text-blue-600"}`
           }
-          to=""
+          to="/add-visa"
         >
-          Tutorials
+          Add Visa
         </NavLink>
       </li>
       <li>
@@ -42,11 +43,22 @@ const Navbar = () => {
           className={({ isActive }) =>
             `font-bold ${isActive ? "bg-blue-800 text-white hover:text-black" : "hover:text-blue-600"}`
           }
-          to=""
+          to="/my-added-visas"
         >
-          About us
+          My added visas
         </NavLink>
       </li>
+      <li>
+        <NavLink
+          className={({ isActive }) =>
+            `font-bold ${isActive ? "bg-blue-800 text-white hover:text-black" : "hover:text-blue-600"}`
+          }
+          to="/my-visa-applications"
+        >
+          My Visa applications
+        </NavLink>
+      </li>
+      
       {
         user && (
           <li>
@@ -94,29 +106,44 @@ const Navbar = () => {
                 {links}
               </ul>
             </div>
-            <img className="w-16 h-16" src="" alt="" />
+            <img className="w-16 h-16" src={logo} alt="" />
           </div>
           <div className="navbar-center hidden lg:flex">
             <ul className="menu menu-horizontal px-1">{links}</ul>
           </div>
           <div className="navbar-end">
-            {user?.email ? (
-              <div className="flex gap-3">
-                <img
-                  className="rounded-full w-12 h-12"
-                  src={user?.photoURL || " "}
-                  alt="User"
-                />
-                <button onClick={handleLogout} className="btn bg-gradient-to-r from-blue-500 to-purple-500 text-white">
-                  Logout
-                </button>
-              </div>
-            ) : (
-              <NavLink to="/login">
-                <button className="btn bg-gradient-to-r from-blue-500 to-purple-500 text-white">Login</button>
-              </NavLink>
-            )}
-          </div>
+  {user?.email ? (
+    <div className="flex gap-3 items-center">
+      <div className="relative group">
+        <img
+          className="rounded-full w-12 h-12 border-2 border-gradient-to-r from-blue-500 to-purple-500 shadow-lg"
+          src={user?.photoURL || " "}
+          alt="User"
+        />
+        <div className="absolute top-14 left-1/2 transform -translate-x-1/2 w-40 p-3 bg-gradient-to-r from-blue-500 to-purple-500 rounded-lg shadow-xl opacity-0 group-hover:opacity-100 transition-all duration-500 ease-in-out scale-75 group-hover:scale-100">
+          <p className="text-white text-center font-semibold animate-bounce">
+            {user?.displayName || "Hello, User!"}
+          </p>
+         
+        </div>
+      </div>
+      <button
+        onClick={handleLogout}
+        className="btn bg-gradient-to-r from-blue-500 to-purple-500 text-white hover:shadow-lg hover:scale-105 transition-transform"
+      >
+        Logout
+      </button>
+    </div>
+  ) : (
+    <NavLink to="/login">
+      <button className="btn bg-gradient-to-r from-blue-500 to-purple-500 text-white hover:shadow-lg hover:scale-105 transition-transform">
+        Login
+      </button>
+    </NavLink>
+  )}
+</div>
+
+
         </div>
       </div>
     </>
