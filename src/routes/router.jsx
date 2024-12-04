@@ -5,7 +5,12 @@ import Register from "../Pages/Register/Register";
 import Login from "../Pages/Login/Login";
 import ForgetPassword from "../Components/ForgetPassword/ForgetPassword";
 import Error from "../Components/Error/Error";
-import AboutUs from "../Components/AboutUs/AboutUs";
+import PrivateRoute from "../Components/PrivateRoute/PrivateRoute";
+import AllVisas from "../Components/AllVisas/AllVisas";
+import AddVisa from "../Components/AddVisa/AddVisa";
+import MyAddedVisas from "../Components/MyAddedVisas/MyAddedVisas";
+import MyVisaApplications from "../Components/MyVisaApplications/MyVisaApplications";
+import MyProfile from "../Components/MyProfile/MyProfile";
 
 const router = createBrowserRouter([
   {
@@ -17,8 +22,32 @@ const router = createBrowserRouter([
         element: <Home />,
 
       },
-    
+
     ]
+  },
+  {
+    path: "/all-visas",
+    element: <PrivateRoute>
+      <AllVisas />
+    </PrivateRoute>,
+  },
+  {
+    path: "/add-visa",
+    element: <PrivateRoute>
+      <AddVisa />
+    </PrivateRoute>,
+  },
+  {
+    path: "/my-added-visas",
+    element: <PrivateRoute>
+      <MyAddedVisas />
+    </PrivateRoute>,
+  },
+  {
+    path: "/my-visa-applications",
+    element: <PrivateRoute>
+      <MyVisaApplications />
+    </PrivateRoute>,
   },
   {
     path: "/login",
@@ -32,14 +61,15 @@ const router = createBrowserRouter([
     path: "/pages/register",
     element: <Register />,
   },
-  {
-    path: "/about-us",
-    element: <AboutUs />,
-  },
+  
 
   {
     path: "/forget-password",
     element: <ForgetPassword />,
+  },
+  {
+    path: "/my-profile",
+    element: <MyProfile />,
   },
 
   {

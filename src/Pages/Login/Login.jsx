@@ -4,6 +4,7 @@ import { authContext } from "../../Components/AuthProvider/AuthProvider";
 import Navbar from "../../Components/Navbar/Navbar";
 import toast from 'react-hot-toast';
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import Footer from "../../Components/Footer/Footer";
 
 const Login = () => {
   const { handleLogin, handleGoogleLogin } = useContext(authContext);
@@ -111,6 +112,7 @@ const Login = () => {
           <p className="text-center font-semibold">Don’t Have An Account ? <Link className="text-[#F75B5F]" to="/pages/register">Register</Link></p>
         </div>
       </div>
+      <Footer/>
     </>
   );
 };

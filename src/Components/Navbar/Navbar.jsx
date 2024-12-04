@@ -66,7 +66,7 @@ const Navbar = () => {
               className={({ isActive }) =>
                 `font-bold ${isActive ? "bg-blue-800 text-white hover:text-black" : "hover:text-blue-600"}`
               }
-              to=""
+              to="/my-profile"
             >
               My Profile
             </NavLink>

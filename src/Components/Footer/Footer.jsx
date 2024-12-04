@@ -3,13 +3,13 @@ const Footer = () => {
   return (
     <div className="bg-gray-800 text-white">
       <div className="footer p-10">
-        <h1 className="text-2xl font-bold text-center pt-10">Lingo Bingo</h1>
+        <h1 className="text-2xl font-bold text-center pt-10">Visa Navigator</h1>
 
         <div>
           <h2 className="font-bold text-lg mb-2">Contact Us</h2>
-          <p>Email: <a href="mailto:info@lingobingo.com" className="text-blue-400 hover:underline">info@lingobingo.com</a></p>
+          <p>Email: <a href="mailto:info@lingobingo.com" className="text-blue-400 hover:underline">info@visanavigator.com</a></p>
           <p>Phone: <a href="tel:+1234567890" className="text-blue-400 hover:underline">+123 456 7890</a></p>
-          <p>Address: 123 Lingo Street, Vocabulary City</p>
+          <p>Address: 12/A Rankin St, Dhaka 1203, Bangladesh</p>
         </div>
 
 
@@ -38,7 +38,7 @@ const Footer = () => {
       </div>
       <div>
         <p className="text-center py-8 text-gray-400">
-          © 2024 Lingo Bingo. All Rights Reserved.
+          © 2024 visa Navigator. All Rights Reserved.
         </p>
       </div>
     </div>

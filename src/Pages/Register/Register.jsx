@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { authContext } from "../../Components/AuthProvider/AuthProvider";
 import Navbar from "../../Components/Navbar/Navbar";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import Footer from "../../Components/Footer/Footer";
 
 const Register = () => {
     const { handleRegister, manageProfile } = useContext(authContext)
@@ -114,6 +115,7 @@ const Register = () => {
                 </div>
 
             </div>
+            <Footer/>
         </>
 
     );
