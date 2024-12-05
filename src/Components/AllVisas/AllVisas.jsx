@@ -26,7 +26,7 @@ const AllVisas = () => {
             <p className="text-gray-500 text-sm">Processing Time: {visa.processingTime}</p>
             <p className="text-gray-700 mt-2">{visa.description}</p>
             <p className="text-green-600 font-bold mt-2">Fee: {visa.fee}</p>
-            <Link to={"/visa-details"}>
+            <Link to={`/visa-details/${visa._id}`}>
             <button
               className="mt-4 w-full bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600"
              
