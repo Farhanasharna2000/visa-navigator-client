@@ -2,12 +2,14 @@ import { useContext, useEffect, useState } from "react";
 import { authContext } from "../AuthProvider/AuthProvider";
 import Footer from "../Footer/Footer";
 import Navbar from "../Navbar/Navbar";
+import Swal from "sweetalert2";
 
 const MyVisaApplications = () => {
     const { user } = useContext(authContext);
     const [applicationData, setApplicationData] = useState([]);
 
     useEffect(() => {
+
         const fetchData = async () => {
             try {
                 const response = await fetch("http://localhost:3000/myVisaApplications", {
@@ -18,7 +20,6 @@ const MyVisaApplications = () => {
                     },
                 });
                 const data = await response.json();
-
 
                 setApplicationData(data);
             }
@@ -33,15 +34,34 @@ const MyVisaApplications = () => {
         }
     }, [user?.email]);
 
+    const handleDelete = (id) => {
+        fetch(`http://localhost:3000/myVisaApplications/${id}`, {
+          method: "DELETE",
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            const newData = applicationData.filter((application) => id !== application._id);
+            setApplicationData(newData);
+            if (data.deletedCount === 1) {
+              Swal.fire("Successfully deleted one document.");
+            } else {
+              Swal.fire("No documents matched the query. Deleted 0 documents.");
+            }
+          })
+          .catch((error) => {
+            console.error("Error deleting visa application:", error);
+            Swal.fire("Failed to delete the document.");
+          });
+      };
     return (
         <div>
             <Navbar />
             <div className="p-8">
                 <h1 className="text-3xl font-bold text-center mb-8">My Visa Applications</h1>
+                { applicationData.length === 0 ?
+                            <p className="text-center text-xl text-red-500 py-10">No data found</p> :
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                    { applicationData.length === 0 ?
-                            <p>No data found</p> :
-                            (applicationData.map((data) => (
+                    { (applicationData.map((data) => (
                                 <div key={data._id} className="max-w-md bg-white shadow-lg rounded-lg p-4 border border-gray-200">
                                     <div className="flex items-center space-x-4">
                                         <img src={data.countryImg} alt="country" className="w-16 h-16 rounded-full object-cover" />
@@ -66,6 +86,7 @@ const MyVisaApplications = () => {
 
                                     <div className="mt-4">
                                         <button
+                                        onClick={()=>handleDelete(data._id)}
                                             className="w-full bg-red-500 text-white py-2 px-4 rounded-lg hover:bg-red-600"
                                         >
                                             Cancel
@@ -74,6 +95,7 @@ const MyVisaApplications = () => {
                                 </div>
                             )))}
                 </div>
+                }
             </div>
             <Footer />
         </div>
