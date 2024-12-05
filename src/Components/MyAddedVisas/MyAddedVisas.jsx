@@ -4,6 +4,8 @@ import Navbar from "../Navbar/Navbar";
 import { authContext } from "../AuthProvider/AuthProvider";
 import { MdDeleteForever, MdOutlineModeEditOutline } from "react-icons/md";
 import Swal from "sweetalert2";
+import { Tooltip } from 'react-tooltip'
+import 'react-tooltip/dist/react-tooltip.css'
 
 const MyAddedVisas = () => {
     const { user } = useContext(authContext);
@@ -118,10 +120,10 @@ const MyAddedVisas = () => {
             Swal.fire("Error updating visa:", error);
         }
     };
-    // if (!myAddedVisas) return ;
     return (
         <div>
             <Navbar />
+            <Tooltip id="my-tooltip" />
             <div className="p-8">
                 <h1 className="text-3xl font-bold text-center mb-8">My Added Visa</h1>
                 {error ? (
@@ -150,10 +152,10 @@ const MyAddedVisas = () => {
                                         </div>
                                     </div>
                                     <div className="flex flex-col gap-3">
-                                        <button className="btn text-xl" onClick={() => openUpdateModal(data)}>
+                                        <button data-tooltip-id="my-tooltip" data-tooltip-content="Edit" className="btn text-xl" onClick={() => openUpdateModal(data)}>
                                             <MdOutlineModeEditOutline />
                                         </button>
-                                        <button onClick={() => handleDelete(data._id)} className="btn text-xl">
+                                        <button  data-tooltip-id="my-tooltip" data-tooltip-content="Delete" onClick={() => handleDelete(data._id)} className="btn text-xl">
                                             <MdDeleteForever />
                                         </button>
                                     </div>
