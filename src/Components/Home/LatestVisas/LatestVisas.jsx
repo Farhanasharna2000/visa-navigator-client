@@ -5,10 +5,10 @@ const LatestVisas = () => {
     const [latestVisas, setLatestVisas] = useState([]);
 
     useEffect(() => {
-      fetch("http://localhost:3000/visaData")
+      fetch("http://localhost:3000/visaDataSort")
         .then((response) => response.json())
         .then((data) => {
-          setLatestVisas(data.slice(0, 6)); 
+          setLatestVisas(data); 
         });
     }, []); 
   return (

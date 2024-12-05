@@ -71,20 +71,7 @@ const Navbar = () => {
         </NavLink>
       </li>
 
-      {
-        user && (
-          <li>
-            <NavLink
-              className={({ isActive }) =>
-                `font-bold ${isActive ? "bg-blue-800 text-white hover:text-black" : "hover:text-blue-600"}`
-              }
-              to="/my-profile"
-            >
-              My Profile
-            </NavLink>
-          </li>
-        )
-      }
+
     </>
 
   );
@@ -121,7 +108,7 @@ const Navbar = () => {
             </div>
             <img className="w-16 h-16" src={logo} alt="" />
           </div>
-          <div className="navbar-center hidden lg:flex">
+          <div className="navbar-center hidden lg:flex ">
             <ul className="menu menu-horizontal px-1">{links}</ul>
           </div>
           <div className="navbar-end">
@@ -133,11 +120,16 @@ const Navbar = () => {
                     src={user?.photoURL || " "}
                     alt="User"
                   />
-                  <div className="absolute top-14 left-1/2 transform -translate-x-1/2 w-40 p-3 bg-gradient-to-r from-blue-500 to-purple-500 rounded-lg shadow-xl opacity-0 group-hover:opacity-100 transition-all duration-500 ease-in-out scale-75 group-hover:scale-100">
-                    <p className="text-white text-center font-semibold animate-bounce">
+                  <div className="absolute text-center top-14 left-1/2 transform -translate-x-1/2 w-40 p-3 bg-gradient-to-r from-blue-500 to-purple-500 rounded-lg shadow-xl opacity-0 group-hover:opacity-100 transition-all duration-500 ease-in-out scale-75 group-hover:scale-100">
+                    <p className="text-white  font-semibold animate-bounce mb-3">
                       {user?.displayName || "Hello, User!"}
                     </p>
-
+                    <button
+                      onClick={handleLogout}
+                      className="btn btn-outline text-white "
+                    >
+                      Logout
+                    </button>
                   </div>
                 </div>
                 <button

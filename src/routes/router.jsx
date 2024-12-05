@@ -10,7 +10,6 @@ import AllVisas from "../Components/AllVisas/AllVisas";
 import AddVisa from "../Components/AddVisa/AddVisa";
 import MyAddedVisas from "../Components/MyAddedVisas/MyAddedVisas";
 import MyVisaApplications from "../Components/MyVisaApplications/MyVisaApplications";
-import MyProfile from "../Components/MyProfile/MyProfile";
 import VisaDetails from "../Components/VisaDetails/VisaDetails";
 
 const router = createBrowserRouter([
@@ -72,15 +71,11 @@ const router = createBrowserRouter([
     path: "/pages/register",
     element: <Register />,
   },
-  
+
 
   {
     path: "/forget-password",
     element: <ForgetPassword />,
-  },
-  {
-    path: "/my-profile",
-    element: <MyProfile />,
   },
 
   {
