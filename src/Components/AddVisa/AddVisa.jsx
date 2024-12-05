@@ -4,9 +4,14 @@ import Navbar from "../Navbar/Navbar";
 import DatePicker from "react-datepicker";
 import { useState } from "react";
 import "react-datepicker/dist/react-datepicker.css";
+import { useContext } from "react";
+import { authContext } from "../AuthProvider/AuthProvider";
 
 const AddVisa = () => {
     const [startDate, setStartDate] = useState(new Date());
+
+    const{user}=useContext(authContext)
+
     const handleSubmit = e => {
         e.preventDefault()
 
@@ -21,6 +26,7 @@ const AddVisa = () => {
         const fee = form.fee.value;
         const validity = startDate.toLocaleDateString("en-CA");
         const method = form.applicationMethod.value;
+        const authUserEmail = user.email;
 
 
         const requiredDocuments = Array.from(
@@ -30,7 +36,7 @@ const AddVisa = () => {
 
 
 
-        const newData = { image, name, visaType, processingTime, description, age, fee, validity, method, requiredDocuments }
+        const newData = { image, name, visaType, processingTime, description, age, fee, validity, method, requiredDocuments,authUserEmail }
 
 
         fetch("http://localhost:3000/visaData", {

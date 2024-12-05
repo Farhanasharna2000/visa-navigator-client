@@ -16,6 +16,12 @@ const VisaDetails = () => {
         email: "",
         firstName: "",
         lastName: "",
+        countryImg: "",
+        country:"",
+        type:"",
+        time:"",
+        validity:"",
+        method:"",
         appliedDate: new Date().toISOString().split('T')[0],
         fee: 0,
     });
@@ -25,7 +31,17 @@ const VisaDetails = () => {
             .then((res) => res.json())
             .then((data) => {
                 setVisaDetails(data);
-                setFormData(prevData => ({ ...prevData, fee: data.fee }));
+                setFormData(prevData => ({ ...prevData,
+                     fee: data.fee ,
+                     countryImg:data.image,
+                     country:data.name,
+                     type:data.visaType,
+                     time:data.processingTime,
+                     validity:data.validity,
+                     method:data.method,
+
+
+                     }));
             });
     }, [id]);
 
@@ -33,7 +49,7 @@ const VisaDetails = () => {
         if (user) {
             setFormData((prevData) => ({
                 ...prevData,
-                email: user.email,
+                email: user.email
             }));
         }
     }, [user]);
@@ -47,6 +63,7 @@ const VisaDetails = () => {
     };
 
     const handleSubmit = (e) => {
+        
         e.preventDefault();
         fetch("http://localhost:3000/visaApplications", {
             method: "POST",
