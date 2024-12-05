@@ -22,9 +22,10 @@ const AllVisas = () => {
               className="w-full h-40 object-cover rounded-t-lg"
             />
             <h2 className="text-xl font-semibold mt-4">{visa.name}</h2>
-            <p className="text-gray-500 text-sm">Type: {visa.visaType}</p>
-            <p className="text-gray-500 text-sm">Processing Time: {visa.processingTime}</p>
-            <p className="text-gray-700 mt-2">{visa.description}</p>
+            <p className="text-gray-500 text-sm">Type : {visa.visaType}</p>
+            <p className="text-gray-500 text-sm">Processing Time : {visa.processingTime}</p>
+            <p className="text-gray-700 mt-2">Validity : {visa.validity}</p>
+            <p className="text-gray-700 mt-2">Application Method : {visa.method}</p>
             <p className="text-green-600 font-bold mt-2">Fee: {visa.fee}</p>
             <Link to={`/visa-details/${visa._id}`}>
             <button
