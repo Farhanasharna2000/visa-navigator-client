@@ -19,7 +19,7 @@ const LatestVisas = () => {
         {latestVisas.map((visa) => (
           <div
             key={visa._id}
-            className="flex flex-col  rounded-lg shadow-md p-4 bg-white"
+            className="flex flex-col rounded-lg shadow-md p-4 bg-white"
           >
        <div className="flex-grow">
        <img

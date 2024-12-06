@@ -106,16 +106,16 @@ const MyAddedVisas = () => {
             if (response.ok) {
                 Swal.fire("Visa data updated successfully.");
     
-                setMyAddedVisas(prevState => 
-                    prevState.map(visa => 
+                setMyAddedVisas(prevState =>
+                    prevState.map(visa =>
                         visa._id === visaToUpdate._id ? { ...visa, ...updatedVisa } : visa
                     )
                 );
     
                 setIsModalOpen(false);
             } else {
-               
-                Swal.fire("Failed to update visa.");
+                console.error("Error updating visa:", data);
+                Swal.fire(data.message || "Failed to update visa.");
             }
         } catch (error) {
             Swal.fire("Error updating visa:", error);

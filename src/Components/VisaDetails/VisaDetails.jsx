@@ -144,7 +144,7 @@ const VisaDetails = () => {
 
             {isModalOpen && (
                 <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
-                    <div className="bg-white p-6 rounded-lg shadow-lg w-5/12 transform transition-transform duration-500 scale-95 hover:scale-100">
+                    <div className="bg-white p-6 rounded-lg shadow-lg md:w-5/12 transform transition-transform duration-500 scale-95 hover:scale-100">
                         <div className="flex justify-between items-center">
                             <h2 className="text-2xl font-bold mb-4">Visa Application Form</h2>
                             <button
