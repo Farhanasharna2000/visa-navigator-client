@@ -1,29 +1,35 @@
-import  { useState, useEffect } from "react";
 import { Link, useLoaderData } from "react-router-dom";
 import Footer from "../Footer/Footer";
 import Navbar from "../Navbar/Navbar";
 import { Helmet } from "react-helmet";
+import { useState } from "react";
 
 const AllVisas = () => {
   const visas = useLoaderData();
-  const [filteredVisas, setFilteredVisas] = useState(visas);
-  const [visaTypes, setVisaTypes] = useState([]);
-  const [selectedVisaType, setSelectedVisaType] = useState("All");
+  const [selectedVisaType, setSelectedVisaType] = useState("");
+  const [selectedVisa, setSelectedVisa] = useState(visas);
 
-  useEffect(() => {
-    const types = [...new Set(visas.map((visa) => visa.visaType))];
-    setVisaTypes(types);
-  }, [visas]);
+  const handleSelect = (e) => {
+    const visaType = e.target.value;
+    console.log(visaType);
 
-  const handleFilterChange = (e) => {
-    const selectedType = e.target.value;
-    setSelectedVisaType(selectedType);
+    setSelectedVisaType(visaType);
 
-    if (selectedType === "All") {
-      setFilteredVisas(visas);
+    if (visaType) {
+      fetch(`http://localhost:3000/selectedVisa?visaType=${visaType}`, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          setSelectedVisa(data);
+        })
+        .catch((error) => {
+          console.error("Error during fetch:", error);
+        });
     } else {
-      const filtered = visas.filter((visa) => visa.visaType === selectedType);
-      setFilteredVisas(filtered);
+      setSelectedVisa(visas);
     }
   };
 
@@ -35,28 +41,23 @@ const AllVisas = () => {
       <Navbar />
       <div className="p-8">
         <h1 className="text-3xl font-bold text-center mb-8">All Visas</h1>
-
-        <div className="mb-8">
-          <label htmlFor="visa-type" className="text-lg font-medium text-gray-700 mr-4">
-            Filter by Visa Type:
-          </label>
-          <select
-            id="visa-type"
-            value={selectedVisaType}
-            onChange={handleFilterChange}
-            className="px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
-          >
-            <option value="All">All</option>
-            {visaTypes.map((type, index) => (
-              <option key={index} value={type}>
-                {type}
-              </option>
-            ))}
-          </select>
-        </div>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-          {filteredVisas.map((visa) => (
+        <select
+          onChange={handleSelect}
+          value={selectedVisaType}
+          className="select select-bordered w-full max-w-xs mb-8"
+        >
+          <option selected>
+            Select visa type
+          </option>
+          <option>Business visa</option>
+          <option>Residence visa</option>
+          <option>Student visa</option>
+          <option>Tourist visa</option>
+        </select>
+        { selectedVisa.length === 0 ?
+                            <p className="text-center text-xl text-red-500 py-10">No data found</p> :
+        (<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+          {selectedVisa.map((visa) => (
             <div
               key={visa._id}
               className="border border-gray-200 rounded-lg shadow-md p-4 bg-white flex flex-col"
@@ -68,12 +69,12 @@ const AllVisas = () => {
                   className="w-full h-40 object-cover rounded-t-lg"
                 />
                 <h2 className="text-xl font-semibold mt-4">{visa.name}</h2>
-                <p className="text-gray-500 text-sm">Type: {visa.visaType}</p>
+                <p className="text-gray-500 text-sm">Type : {visa.visaType}</p>
                 <p className="text-gray-500 text-sm">
-                  Processing Time: {visa.processingTime}
+                  Processing Time : {visa.processingTime}
                 </p>
-                <p className="text-gray-700 mt-2">Validity: {visa.validity}</p>
-                <p className="text-gray-700 mt-2">Application Method: {visa.method}</p>
+                <p className="text-gray-700 mt-2">Validity : {visa.validity}</p>
+                <p className="text-gray-700 mt-2">Application Method : {visa.method}</p>
                 <p className="text-green-600 font-bold mt-2">Fee: {visa.fee}</p>
               </div>
 
@@ -86,7 +87,7 @@ const AllVisas = () => {
               </Link>
             </div>
           ))}
-        </div>
+        </div>)}
       </div>
       <Footer />
     </div>

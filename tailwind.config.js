@@ -9,6 +9,7 @@ export default {
       fontFamily: {
         poppins: ["Poppins", "serif"],
       },
+      
     }, 
   },
   plugins: [require('daisyui')],

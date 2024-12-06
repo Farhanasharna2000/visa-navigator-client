@@ -2,6 +2,8 @@ import { Helmet } from "react-helmet";
 import Banner from "../Banner/Banner";
 import LatestVisas from "../LatestVisas/LatestVisas";
 import VisaProcess from "../VisaProcess/VisaProcess";
+import Team from "../Team/Team";
+import Category from "../Category/Category";
 
 const Home = () => {
   
@@ -13,6 +15,8 @@ const Home = () => {
       <Banner />
       <LatestVisas  />
       <VisaProcess/>
+      <Team/>
+      <Category/>
     </div>
   );
 };

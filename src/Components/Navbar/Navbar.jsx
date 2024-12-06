@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { authContext } from "../AuthProvider/AuthProvider";
-import logo from "../../assets/logo.jpg"
+import logo from "../../assets/logo1.png"
 import { FiMoon, FiSun } from "react-icons/fi";
 const Navbar = () => {
   const { handleLogout, user } = useContext(authContext);
@@ -79,7 +79,7 @@ const Navbar = () => {
   return (
     <>
 
-      <div className="bg-base-100 shadow-md py-2">
+      <div className="bg-red-500 shadow-md py-2">
         <div className="navbar container mx-auto">
           <div className="navbar-start">
             <div className="dropdown">
@@ -106,7 +106,7 @@ const Navbar = () => {
                 {links}
               </ul>
             </div>
-            <img className="w-16 h-16" src={logo} alt="" />
+            <img className="w-64 h-20" src={logo} alt="" />
           </div>
           <div className="navbar-center hidden lg:flex ">
             <ul className="menu menu-horizontal px-1">{links}</ul>
@@ -160,7 +160,7 @@ const Navbar = () => {
             className="btn btn-ghost rounded-full p-2 ml-3"
           >
             {theme === 'light' ? (
-              <FiMoon className="text-2xl" />
+              <FiMoon className="text-2xl text-white" />
             ) : (
               <FiSun className="text-2xl text-yellow-300" />
             )}

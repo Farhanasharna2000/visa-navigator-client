@@ -14,12 +14,15 @@ const MyAddedVisas = () => {
     const [error, setError] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [visaToUpdate, setVisaToUpdate] = useState(null);
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         const fetchData = async () => {
             try {
+                setLoading(true);
                 if (!user?.email) {
                     console.log("User is not logged in.");
+                    setLoading(false);
                     return;
                 }
 
@@ -35,6 +38,7 @@ const MyAddedVisas = () => {
                     const errorData = await response.json();
                     console.error("Error fetching data:", errorData.message);
                     setError(errorData.message);
+                    setLoading(false);
                     return;
                 }
 
@@ -43,11 +47,13 @@ const MyAddedVisas = () => {
             } catch (error) {
                 console.error("Error fetching visa applications:", error);
                 setError("An error occurred while fetching data");
+            } finally {
+                setLoading(false); 
             }
         };
 
         fetchData();
-    }, [user?.email]);
+    }, [user?.email])
 
     const handleDelete = (id) => {
         fetch(`http://localhost:3000/myAddedVisas/${id}`, {
@@ -70,18 +76,18 @@ const MyAddedVisas = () => {
     };
 
     const openUpdateModal = (visa) => {
-        setVisaToUpdate(visa); 
-        setIsModalOpen(true);   
+        setVisaToUpdate(visa);
+        setIsModalOpen(true);
     };
 
     const handleUpdateSubmit = async (e) => {
         e.preventDefault();
-    
+
         if (!visaToUpdate?._id) {
             console.error("Visa ID is missing");
             return;
         }
-    
+
         const updatedVisa = {
             ...visaToUpdate,
             name: e.target.name.value,
@@ -92,7 +98,7 @@ const MyAddedVisas = () => {
             method: e.target.method.value,
             image: e.target.image.value,
         };
-    
+
         try {
             const response = await fetch(`http://localhost:3000/update/${visaToUpdate._id}`, {
                 method: "PATCH",
@@ -101,17 +107,17 @@ const MyAddedVisas = () => {
                 },
                 body: JSON.stringify(updatedVisa),
             });
-    
+
             const data = await response.json();
             if (response.ok) {
                 Swal.fire("Visa data updated successfully.");
-    
+
                 setMyAddedVisas(prevState =>
                     prevState.map(visa =>
                         visa._id === visaToUpdate._id ? { ...visa, ...updatedVisa } : visa
                     )
                 );
-    
+
                 setIsModalOpen(false);
             } else {
                 console.error("Error updating visa:", data);
@@ -123,14 +129,17 @@ const MyAddedVisas = () => {
     };
     return (
         <div>
-               <Helmet>
-        <title>visaZen | My Added Visas</title>
-      </Helmet>
+            <Helmet>
+                <title>visaZen | My Added Visas</title>
+            </Helmet>
             <Navbar />
             <Tooltip id="my-tooltip" />
             <div className="p-8">
                 <h1 className="text-3xl font-bold text-center mb-8">My Added Visa</h1>
-                {error ? (
+
+                {loading ? (
+                    <span className="loading loading-bars loading-lg mx-auto block py-40 "></span>
+                ) : error ? (
                     <p className="text-center text-xl text-red-500 py-10">{error}</p>
                 ) : myAddedVisas.length === 0 ? (
                     <p className="text-center text-xl text-red-500 py-10">No data found</p>
@@ -159,7 +168,7 @@ const MyAddedVisas = () => {
                                         <button data-tooltip-id="my-tooltip" data-tooltip-content="Edit" className="btn text-xl" onClick={() => openUpdateModal(data)}>
                                             <MdOutlineModeEditOutline />
                                         </button>
-                                        <button  data-tooltip-id="my-tooltip" data-tooltip-content="Delete" onClick={() => handleDelete(data._id)} className="btn text-xl">
+                                        <button data-tooltip-id="my-tooltip" data-tooltip-content="Delete" onClick={() => handleDelete(data._id)} className="btn text-xl">
                                             <MdDeleteForever />
                                         </button>
                                     </div>
@@ -176,82 +185,82 @@ const MyAddedVisas = () => {
                         <h2 className="text-xl font-semibold mb-4">Update Visa Information</h2>
                         <form onSubmit={handleUpdateSubmit}>
                             <div className="grid grid-cols-2 gap-3">
-                            <label className="block mb-2">
-                                Country Name:
-                                <input 
-                                    type="text" 
-                                    name="name" 
-                                    defaultValue={visaToUpdate.name}
-                                    className="w-full p-2 border rounded"
-                                />
-                            </label>
-                            <label className="block mb-2">
-                                Visa Type:
-                                <input 
-                                    type="text" 
-                                    name="visaType" 
-                                    defaultValue={visaToUpdate.visaType}
-                                    className="w-full p-2 border rounded"
-                                />
-                            </label>
-                            <label className="block mb-2">
-                                Processing Time:
-                                <input 
-                                    type="text" 
-                                    name="processingTime" 
-                                    defaultValue={visaToUpdate.processingTime}
-                                    className="w-full p-2 border rounded"
-                                />
-                            </label>
-                            <label className="block mb-2">
-                                Fee:
-                                <input 
-                                    type="number" 
-                                    name="fee" 
-                                    defaultValue={visaToUpdate.fee}
-                                    className="w-full p-2 border rounded"
-                                />
-                            </label>
-                            <label className="block mb-2">
-                                Validity:
-                                <input 
-                                    type="text" 
-                                    name="validity" 
-                                    defaultValue={visaToUpdate.validity}
-                                    className="w-full p-2 border rounded"
-                                />
-                            </label>
-                            <label className="block mb-2">
-                                Application Method:
-                                <input 
-                                    type="text" 
-                                    name="method" 
-                                    defaultValue={visaToUpdate.method}
-                                    className="w-full p-2 border rounded"
-                                />
-                            </label>
-                            <label className="block mb-4">
-                                Country Image URL:
-                                <input 
-                                    type="text" 
-                                    name="image" 
-                                    defaultValue={visaToUpdate.image}
-                                    className="w-full p-2 border rounded"
-                                />
-                            </label>
+                                <label className="block mb-2">
+                                    Country Name:
+                                    <input
+                                        type="text"
+                                        name="name"
+                                        defaultValue={visaToUpdate.name}
+                                        className="w-full p-2 border rounded"
+                                    />
+                                </label>
+                                <label className="block mb-2">
+                                    Visa Type:
+                                    <input
+                                        type="text"
+                                        name="visaType"
+                                        defaultValue={visaToUpdate.visaType}
+                                        className="w-full p-2 border rounded"
+                                    />
+                                </label>
+                                <label className="block mb-2">
+                                    Processing Time:
+                                    <input
+                                        type="text"
+                                        name="processingTime"
+                                        defaultValue={visaToUpdate.processingTime}
+                                        className="w-full p-2 border rounded"
+                                    />
+                                </label>
+                                <label className="block mb-2">
+                                    Fee:
+                                    <input
+                                        type="number"
+                                        name="fee"
+                                        defaultValue={visaToUpdate.fee}
+                                        className="w-full p-2 border rounded"
+                                    />
+                                </label>
+                                <label className="block mb-2">
+                                    Validity:
+                                    <input
+                                        type="text"
+                                        name="validity"
+                                        defaultValue={visaToUpdate.validity}
+                                        className="w-full p-2 border rounded"
+                                    />
+                                </label>
+                                <label className="block mb-2">
+                                    Application Method:
+                                    <input
+                                        type="text"
+                                        name="method"
+                                        defaultValue={visaToUpdate.method}
+                                        className="w-full p-2 border rounded"
+                                    />
+                                </label>
+                                <label className="block mb-4">
+                                    Country Image URL:
+                                    <input
+                                        type="text"
+                                        name="image"
+                                        defaultValue={visaToUpdate.image}
+                                        className="w-full p-2 border rounded"
+                                    />
+                                </label>
 
                             </div>
-                            
+
                             <div className="flex justify-between">
-                                <button 
-                                    type="button" 
-                                    onClick={() => setIsModalOpen(false)} 
+                                <button
+                                    type="button"
+                                    onClick={() => setIsModalOpen(false)}
                                     className="bg-gray-300 text-white px-4 py-2 rounded">
                                     Cancel
                                 </button>
-                                <button 
-                                
-                                    type="submit" 
+                                <button
+
+                                    type="submit"
                                     className="bg-blue-500 text-white px-4 py-2 rounded">
                                     Update Visa
                                 </button>
