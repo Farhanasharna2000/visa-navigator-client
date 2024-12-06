@@ -16,7 +16,7 @@ const MainLayOut = () => {
 
     <div className="font-poppins ">
       <Helmet>
-        <title>Visa Navigator</title>
+        <title>visaZen</title>
       </Helmet>
       <Navbar />
       <div className="container mx-auto">

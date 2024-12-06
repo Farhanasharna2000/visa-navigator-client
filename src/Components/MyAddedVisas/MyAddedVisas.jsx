@@ -6,6 +6,7 @@ import { MdDeleteForever, MdOutlineModeEditOutline } from "react-icons/md";
 import Swal from "sweetalert2";
 import { Tooltip } from 'react-tooltip'
 import 'react-tooltip/dist/react-tooltip.css'
+import { Helmet } from "react-helmet";
 
 const MyAddedVisas = () => {
     const { user } = useContext(authContext);
@@ -122,6 +123,9 @@ const MyAddedVisas = () => {
     };
     return (
         <div>
+               <Helmet>
+        <title>visaZen | My Added Visas</title>
+      </Helmet>
             <Navbar />
             <Tooltip id="my-tooltip" />
             <div className="p-8">
@@ -135,7 +139,7 @@ const MyAddedVisas = () => {
                         {myAddedVisas.map((data) => (
                             <div key={data._id} className="max-w-md bg-white shadow-lg rounded-lg p-8 border border-gray-200">
                                 <div className="flex">
-                                    <div>
+                                    <div >
                                         <div className="flex items-center space-x-4">
                                             <img src={data.image} alt="country" className="w-16 h-16 rounded-full object-cover" />
                                             <div>

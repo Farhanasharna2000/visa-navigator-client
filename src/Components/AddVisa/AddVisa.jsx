@@ -6,6 +6,7 @@ import { useState } from "react";
 import "react-datepicker/dist/react-datepicker.css";
 import { useContext } from "react";
 import { authContext } from "../AuthProvider/AuthProvider";
+import { Helmet } from "react-helmet";
 
 const AddVisa = () => {
     const [startDate, setStartDate] = useState(new Date());
@@ -60,6 +61,9 @@ const AddVisa = () => {
     }
     return (
         <div>
+            <Helmet>
+        <title>visaZen | Add Visa</title>
+      </Helmet>
             <Navbar />
 
             <div className="max-w-4xl mx-auto mt-10 p-6 bg-slate-100 rounded-lg shadow-md my-10">
