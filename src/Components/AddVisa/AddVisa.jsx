@@ -40,7 +40,7 @@ const AddVisa = () => {
         const newData = { image, name, visaType, processingTime, description, age, fee, validity, method, requiredDocuments,authUserEmail }
 
 
-        fetch("http://localhost:3000/visaData", {
+        fetch("https://visa-navigator-server-liart.vercel.app/visaData", {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json'
@@ -62,7 +62,7 @@ const AddVisa = () => {
     return (
         <div>
             <Helmet>
-        <title>visaZen | Add Visa</title>
+        <title>VisaZen | Add Visa</title>
       </Helmet>
             <Navbar />
 

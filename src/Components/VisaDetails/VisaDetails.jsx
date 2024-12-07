@@ -27,7 +27,7 @@ const VisaDetails = () => {
     });
 
     useEffect(() => {
-        fetch(`http://localhost:3000/visaData/${id}`)
+        fetch(`https://visa-navigator-server-liart.vercel.app/visaData/${id}`)
             .then((res) => res.json())
             .then((data) => {
                 setVisaDetails(data);
@@ -65,7 +65,7 @@ const VisaDetails = () => {
     const handleSubmit = (e) => {
         
         e.preventDefault();
-        fetch("http://localhost:3000/visaApplications", {
+        fetch("https://visa-navigator-server-liart.vercel.app/visaApplications", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

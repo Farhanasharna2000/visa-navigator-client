@@ -11,12 +11,11 @@ const AllVisas = () => {
 
   const handleSelect = (e) => {
     const visaType = e.target.value;
-    console.log(visaType);
 
     setSelectedVisaType(visaType);
 
     if (visaType) {
-      fetch(`http://localhost:3000/selectedVisa?visaType=${visaType}`, {
+      fetch(`https://visa-navigator-server-liart.vercel.app/selectedVisa?visaType=${visaType}`, {
         headers: {
           "Content-Type": "application/json",
         },
@@ -36,7 +35,7 @@ const AllVisas = () => {
   return (
     <div>
       <Helmet>
-        <title>visaZen | All Visas</title>
+        <title>VisaZen | All Visas</title>
       </Helmet>
       <Navbar />
       <div className="p-8">

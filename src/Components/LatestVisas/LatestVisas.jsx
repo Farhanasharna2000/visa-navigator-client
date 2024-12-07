@@ -6,7 +6,7 @@ const LatestVisas = () => {
   const [latestVisas, setLatestVisas] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:3000/visaDataSort")
+    fetch("https://visa-navigator-server-liart.vercel.app/visaDataSort")
       .then((response) => response.json())
       .then((data) => {
         setLatestVisas(data);

@@ -14,7 +14,7 @@ const [search,setSearch]=useState("")
 
         const fetchData = async () => {
             try {
-                const response = await fetch("http://localhost:3000/myVisaApplications", {
+                const response = await fetch("https://visa-navigator-server-liart.vercel.app/myVisaApplications", {
                     method: "GET",
                     headers: {
                         "Content-Type": "application/json",
@@ -37,7 +37,7 @@ const [search,setSearch]=useState("")
     }, [user?.email]);
 
     const handleDelete = (id) => {
-        fetch(`http://localhost:3000/myVisaApplications/${id}`, {
+        fetch(`https://visa-navigator-server-liart.vercel.app/myVisaApplications/${id}`, {
           method: "DELETE",
         })
           .then((res) => res.json())
@@ -56,7 +56,7 @@ const [search,setSearch]=useState("")
           });
       };
 const handleSearch = ()=> {
-        fetch(`http://localhost:3000/myVisaApplications?searchParams=${encodeURIComponent(search)}`, {
+        fetch(`https://visa-navigator-server-liart.vercel.app/myVisaApplications?searchParams=${encodeURIComponent(search)}`, {
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${user?.email}`,
@@ -75,7 +75,7 @@ const handleSearch = ()=> {
     return (
         <div>
              <Helmet>
-        <title>visaZen | My Visa Applications</title>
+        <title>VisaZen | My Visa Applications</title>
       </Helmet>
             <Navbar />
             <div className="p-8">

@@ -21,12 +21,11 @@ const MyAddedVisas = () => {
             try {
                 setLoading(true);
                 if (!user?.email) {
-                    console.log("User is not logged in.");
                     setLoading(false);
                     return;
                 }
 
-                const response = await fetch("http://localhost:3000/myAddedVisas", {
+                const response = await fetch("https://visa-navigator-server-liart.vercel.app/myAddedVisas", {
                     method: "GET",
                     headers: {
                         "Content-Type": "application/json",
@@ -36,7 +35,6 @@ const MyAddedVisas = () => {
 
                 if (!response.ok) {
                     const errorData = await response.json();
-                    console.error("Error fetching data:", errorData.message);
                     setError(errorData.message);
                     setLoading(false);
                     return;
@@ -45,8 +43,7 @@ const MyAddedVisas = () => {
                 const data = await response.json();
                 setMyAddedVisas(data);
             } catch (error) {
-                console.error("Error fetching visa applications:", error);
-                setError("An error occurred while fetching data");
+                setError("An error occurred while fetching data", error);
             } finally {
                 setLoading(false); 
             }
@@ -56,7 +53,7 @@ const MyAddedVisas = () => {
     }, [user?.email])
 
     const handleDelete = (id) => {
-        fetch(`http://localhost:3000/myAddedVisas/${id}`, {
+        fetch(`https://visa-navigator-server-liart.vercel.app/myAddedVisas/${id}`, {
             method: "DELETE",
         })
             .then((res) => res.json())
@@ -100,7 +97,7 @@ const MyAddedVisas = () => {
         };
 
         try {
-            const response = await fetch(`http://localhost:3000/update/${visaToUpdate._id}`, {
+            const response = await fetch(`https://visa-navigator-server-liart.vercel.app/update/${visaToUpdate._id}`, {
                 method: "PATCH",
                 headers: {
                     'Content-Type': 'application/json',
@@ -130,7 +127,7 @@ const MyAddedVisas = () => {
     return (
         <div>
             <Helmet>
-                <title>visaZen | My Added Visas</title>
+                <title>VisaZen | My Added Visas</title>
             </Helmet>
             <Navbar />
             <Tooltip id="my-tooltip" />

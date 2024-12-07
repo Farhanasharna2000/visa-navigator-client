@@ -30,7 +30,7 @@ const router = createBrowserRouter([
     element: <PrivateRoute>
       <AllVisas />
     </PrivateRoute>,
-    loader: () => fetch("http://localhost:3000/visaData")
+    loader: () => fetch("https://visa-navigator-server-liart.vercel.app/visaData")
   },
   {
     path: "/add-visa",
