@@ -5,7 +5,9 @@ import { useParams } from "react-router-dom";
 import { authContext } from "../AuthProvider/AuthProvider";
 import { FaTimes } from "react-icons/fa";
 import Swal from "sweetalert2";
-
+import Lottie from "react-lottie";
+import animationData from '../../animations/Animation - 1733596091594.json'
+import { LuPhoneCall } from "react-icons/lu";
 const VisaDetails = () => {
     const { id } = useParams();
     const { user } = useContext(authContext);
@@ -17,31 +19,41 @@ const VisaDetails = () => {
         firstName: "",
         lastName: "",
         countryImg: "",
-        country:"",
-        type:"",
-        time:"",
-        validity:"",
-        method:"",
+        country: "",
+        type: "",
+        time: "",
+        validity: "",
+        method: "",
         appliedDate: new Date().toISOString().split('T')[0],
         fee: 0,
     });
+
+    const lottieOptions = {
+        loop: true,
+        autoplay: true,
+        animationData,
+        rendererSettings: {
+            preserveAspectRatio: "xMidYMid slice",
+        },
+    };
 
     useEffect(() => {
         fetch(`https://visa-navigator-server-liart.vercel.app/visaData/${id}`)
             .then((res) => res.json())
             .then((data) => {
                 setVisaDetails(data);
-                setFormData(prevData => ({ ...prevData,
-                     fee: data.fee ,
-                     countryImg:data.image,
-                     country:data.name,
-                     type:data.visaType,
-                     time:data.processingTime,
-                     validity:data.validity,
-                     method:data.method,
+                setFormData(prevData => ({
+                    ...prevData,
+                    fee: data.fee,
+                    countryImg: data.image,
+                    country: data.name,
+                    type: data.visaType,
+                    time: data.processingTime,
+                    validity: data.validity,
+                    method: data.method,
 
 
-                     }));
+                }));
             });
     }, [id]);
 
@@ -63,7 +75,7 @@ const VisaDetails = () => {
     };
 
     const handleSubmit = (e) => {
-        
+
         e.preventDefault();
         fetch("https://visa-navigator-server-liart.vercel.app/visaApplications", {
             method: "POST",
@@ -72,76 +84,86 @@ const VisaDetails = () => {
             },
             body: JSON.stringify(formData),
         })
-        .then((res) => res.json())
-        .then((data) => {
-            Swal.fire({
-                title: "Application Submitted!",
-                text: "Your visa application has been submitted successfully.",
-                icon: "success",
-                confirmButtonText: "OK",
-                backdrop: `rgba(0, 0, 0, 0.4)`
+            .then((res) => res.json())
+            .then((data) => {
+                Swal.fire({
+                    title: "Application Submitted!",
+                    text: "Your visa application has been submitted successfully.",
+                    icon: "success",
+                    confirmButtonText: "OK",
+                    backdrop: `rgba(0, 0, 0, 0.4)`
+                });
+                console.log("Visa application submitted:", data);
+                setIsModalOpen(false);
+                formData.reset();
             });
-            console.log("Visa application submitted:", data);
-            setIsModalOpen(false);
-            formData.reset();
-        });
     };
 
     if (!visaDetails) return <span className="loading loading-bars loading-lg mx-auto block py-40"></span>;
 
     return (
-        <div>
+        <div >
             <Navbar />
-            <div className=" container mx-auto">
-                <div>
-                <img
-                        src={visaDetails.image}
-                        alt={`${visaDetails.name} flag`}
-                        className="w-[50%] h-96 rounded-lg my-6 "
-                    />
-                    <h2 className="text-3xl font-extrabold mb-4 text-indigo-800">
-                        {visaDetails.visaType}
-                    </h2>
-                    <p className="text-gray-700 mb-2">
-                        <strong>Country Name:</strong> {visaDetails.name}
-                    </p>
-                    <p className="text-gray-700 mb-2">
-                        <strong>Processing Time:</strong> {visaDetails.processingTime}
-                    </p>
-                    <p className="text-gray-700 mb-2">
-                        <strong>Fee:</strong> ${visaDetails.fee}
-                    </p>
-                    <p className="text-gray-700 mb-2">
-                        <strong>Validity:</strong> {visaDetails.validity}
-                    </p>
-                    <p className="text-gray-700 mb-2">
-                        <strong>Application Method:</strong> {visaDetails.method}
-                    </p>
-                    <p className="text-gray-700 mb-4">
-                        <strong>Description:</strong> {visaDetails.description}
-                    </p>
-                    <p className="text-gray-700 mb-4">
-                        <strong>Age:</strong> {visaDetails.age} years
-                    </p>
-                    <div className="mt-4">
-                        <strong className="text-indigo-800">Required Documents:</strong>
-                        <ul className="list-disc pl-5 space-y-2">
-                            {visaDetails.requiredDocuments.map((doc, index) => (
-                                <li key={index} className="text-gray-600">
-                                    {doc}
-                                </li>
-                            ))}
-                        </ul>
+            <div className=" container mx-auto ">
+                <div className="flex gap-5 ">
+                    <div className="mt-6">
+                        <div className="flex justify-center ">
+                            <Lottie options={lottieOptions} height={300} width={300} />
+                        </div>
+                        <div className="bg-[#ff3c00] text-white text-center py-5 font-bold">
+                            <h2>Our Appoinment Service Call Us</h2>
+                            <p className="flex justify-center items-center gap-2"><span><LuPhoneCall /></span>+123 456 7890</p>
+                        </div>
                     </div>
-                    <button
-                        className="mt-4 bg-indigo-600 text-white p-2 rounded-lg hover:bg-indigo-700"
-                        onClick={() => setIsModalOpen(true)}
-                    >
-                        Apply for the Visa
-                    </button>
-            </div>
+
+                    <div className="mb-8">
+                        <img
+                            src={visaDetails.image}
+                            alt={`${visaDetails.name} flag`}
+                            className="w-full h-96 rounded-lg my-6 "
+                        />
+                        <h2 className="text-3xl font-extrabold mb-4 text-indigo-800">
+                            {visaDetails.visaType} | {visaDetails.name}
+                        </h2>
+                        <p className=" mb-4">
+                             {visaDetails.description}
+                        </p>
+                        <p className=" mb-2">
+                            <strong>Processing Time:</strong> {visaDetails.processingTime}
+                        </p>
+                        <p className=" mb-2">
+                            <strong>Fee:</strong> {visaDetails.fee}
+                        </p>
+                        <p className=" mb-2">
+                            <strong>Validity:</strong> {visaDetails.validity}
+                        </p>
+                        <p className=" mb-2">
+                            <strong>Application Method:</strong> {visaDetails.method}
+                        </p>
+                       
+                        <p className=" mb-4">
+                            <strong>Age:</strong> {visaDetails.age} years
+                        </p>
+                        <div className="mt-4">
+                            <strong className="text-indigo-800">Required Documents:</strong>
+                            <ul className="list-disc pl-5 space-y-2">
+                                {visaDetails.requiredDocuments.map((doc, index) => (
+                                    <li key={index} >
+                                        {doc}
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                        <button
+                            className="mt-4 font-bold hover:bg-slate-100 bg-[#111A3A]  hover:text-[#111A3A] text-white p-2 rounded-lg "
+                            onClick={() => setIsModalOpen(true)}
+                        >
+                            Apply for the Visa
+                        </button>
+                    </div>
                 </div>
-                    
+            </div>
+
 
             {isModalOpen && (
                 <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
@@ -158,7 +180,7 @@ const VisaDetails = () => {
                         <form onSubmit={handleSubmit}>
                             <div className="grid grid-cols-2 gap-3">
                                 <div className="mb-4">
-                                    <label htmlFor="email" className="block text-gray-700 ">Email</label>
+                                    <label htmlFor="email" className="block  ">Email</label>
                                     <input
                                         type="email"
                                         id="email"
@@ -170,7 +192,7 @@ const VisaDetails = () => {
                                     />
                                 </div>
                                 <div className="mb-4">
-                                    <label htmlFor="firstName" className="block text-gray-700">First Name</label>
+                                    <label htmlFor="firstName" className="block ">First Name</label>
                                     <input
                                         type="text"
                                         id="firstName"
@@ -182,7 +204,7 @@ const VisaDetails = () => {
                                     />
                                 </div>
                                 <div className="mb-4">
-                                    <label htmlFor="lastName" className="block text-gray-700">Last Name</label>
+                                    <label htmlFor="lastName" className="block ">Last Name</label>
                                     <input
                                         type="text"
                                         id="lastName"
@@ -194,7 +216,7 @@ const VisaDetails = () => {
                                     />
                                 </div>
                                 <div className="mb-4">
-                                    <label htmlFor="appliedDate" className="block text-gray-700">Applied Date</label>
+                                    <label htmlFor="appliedDate" className="block ">Applied Date</label>
                                     <input
                                         type="date"
                                         id="appliedDate"
@@ -206,7 +228,7 @@ const VisaDetails = () => {
                                     />
                                 </div>
                                 <div className="mb-4">
-                                    <label htmlFor="fee" className="block text-gray-700">Visa Fee</label>
+                                    <label htmlFor="fee" className="block ">Visa Fee</label>
                                     <input
                                         type="number"
                                         id="fee"

@@ -3,6 +3,7 @@ import Footer from "../Footer/Footer";
 import Navbar from "../Navbar/Navbar";
 import { Helmet } from "react-helmet";
 import { useState } from "react";
+
 const AllVisas = () => {
   const visas = useLoaderData();
   const [selectedVisaType, setSelectedVisaType] = useState("");

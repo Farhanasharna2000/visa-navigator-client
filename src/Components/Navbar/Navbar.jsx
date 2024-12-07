@@ -17,7 +17,7 @@ const Navbar = () => {
       <li>
         <NavLink
           className={({ isActive }) =>
-            `font-bold text-white ${isActive ? "bg-white text-[#ff3c00] hover:text-white" : "hover:text-white "}`
+            `font-bold  ${isActive ? "bg-white text-[#ff3c00] hover:text-white" : "hover:text-white text-white"}`
           }
           to="/"
         >
@@ -27,7 +27,7 @@ const Navbar = () => {
       <li>
         <NavLink
           className={({ isActive }) =>
-           `font-bold text-white  ${isActive ? "bg-white text-[#ff3c00] hover:text-white" : "hover:text-white "}`
+           `font-bold   ${isActive ? "bg-white text-[#ff3c00] hover:text-white" : "hover:text-white text-white"}`
           }
           to="/all-visas"
         >
@@ -37,7 +37,7 @@ const Navbar = () => {
       <li>
         <NavLink
           className={({ isActive }) =>
-         `font-bold text-white  ${isActive ? "bg-white text-[#ff3c00] hover:text-white" : "hover:text-white "}`
+         `font-bold   ${isActive ? "bg-white text-[#ff3c00] hover:text-white" : "hover:text-white text-white"}`
           }
           to="/add-visa"
         >
@@ -47,7 +47,7 @@ const Navbar = () => {
       <li>
         <NavLink
           className={({ isActive }) =>
-          `font-bold text-white ${isActive ? "bg-white text-[#ff3c00] hover:text-white" : "hover:text-white "}`
+          `font-bold  ${isActive ? "bg-white text-[#ff3c00] hover:text-white" : "hover:text-white text-white"}`
           }
           to="/my-added-visas"
         >
@@ -57,7 +57,7 @@ const Navbar = () => {
       <li>
         <NavLink
           className={({ isActive }) =>
-             `font-bold text-white ${isActive ? "bg-white text-[#ff3c00] hover:text-white" : "hover:text-white "}`
+             `font-bold  ${isActive ? "bg-white text-[#ff3c00] hover:text-white" : "hover:text-white text-white"}`
           }
           to="/my-visa-applications"
         >
@@ -114,13 +114,13 @@ const Navbar = () => {
                     src={user?.photoURL || " "}
                     alt="User"
                   />
-                  <div className="absolute text-center top-14 left-1/2 transform -translate-x-1/2 w-40 p-3 bg-gradient-to-r from-blue-500 to-purple-500 rounded-lg shadow-xl opacity-0 group-hover:opacity-100 transition-all duration-500 ease-in-out scale-75 group-hover:scale-100">
+                  <div className="absolute text-center top-14 left-1/2 transform -translate-x-1/2 w-40 p-3 bg-[#111A3A]  rounded-lg shadow-xl opacity-0 group-hover:opacity-100 transition-all duration-500 ease-in-out scale-75 group-hover:scale-100">
                     <p className="text-white  font-semibold animate-bounce mb-3">
                       {user?.displayName || "Hello, User!"}
                     </p>
                     <button
                       onClick={handleLogout}
-                      className="btn btn-outline text-white "
+                      className="btn btn-outline text-white hover:bg-white hover:text-[#ff3c00] bg-[#ff3c00]"
                     >
                       Logout
                     </button>
