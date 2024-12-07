@@ -92,12 +92,12 @@ const VisaDetails = () => {
     return (
         <div>
             <Navbar />
-            <div className="md:w-4/12 mx-auto p-6 gap-6">
-                <div className="bg-gradient-to-r from-blue-100 to-indigo-200 rounded-lg shadow-lg hover:shadow-xl transition-shadow p-6">
-                    <img
+            <div className=" container mx-auto">
+                <div>
+                <img
                         src={visaDetails.image}
                         alt={`${visaDetails.name} flag`}
-                        className="w-full h-48 object-cover rounded-lg mb-4 transition-transform transform hover:scale-105"
+                        className="w-[50%] h-96 rounded-lg my-6 "
                     />
                     <h2 className="text-3xl font-extrabold mb-4 text-indigo-800">
                         {visaDetails.visaType}
@@ -139,8 +139,9 @@ const VisaDetails = () => {
                     >
                         Apply for the Visa
                     </button>
-                </div>
             </div>
+                </div>
+                    
 
             {isModalOpen && (
                 <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
@@ -220,7 +221,7 @@ const VisaDetails = () => {
 
                             <button
                                 type="submit"
-                                className="w-full bg-indigo-600 text-white p-2 rounded-lg hover:bg-indigo-700"
+                                className="w-full  hover:bg-black bg-green-700 text-white p-2 rounded-lg "
                             >
                                 Apply
                             </button>

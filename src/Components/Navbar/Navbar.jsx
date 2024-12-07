@@ -1,21 +1,15 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext} from "react";
 import { NavLink } from "react-router-dom";
 import { authContext } from "../AuthProvider/AuthProvider";
 import logo from "../../assets/logo1.png"
 import { FiMoon, FiSun } from "react-icons/fi";
+import { useTheme } from "../ThemeContext/ThemeContext";
 const Navbar = () => {
   const { handleLogout, user } = useContext(authContext);
-  const [theme, setTheme] = useState(
-    localStorage.getItem('theme') || 'light'
-  );
-
-  useEffect(() => {
-    document.documentElement.setAttribute('data-theme', theme);
-    localStorage.setItem('theme', theme);
-  }, [theme]);
+  const { theme, setTheme } = useTheme();
 
   const toggleTheme = () => {
-    setTheme(theme === 'light' ? 'dark' : 'light');
+    setTheme(theme === "light" ? "dark" : "light");
   };
 
   const links = (
@@ -23,7 +17,7 @@ const Navbar = () => {
       <li>
         <NavLink
           className={({ isActive }) =>
-            `font-bold  ${isActive ? "bg-blue-800 text-white hover:text-black" : "hover:text-blue-600"}`
+            `font-bold text-white ${isActive ? "bg-white text-[#ff3c00] hover:text-white" : "hover:text-white "}`
           }
           to="/"
         >
@@ -33,7 +27,7 @@ const Navbar = () => {
       <li>
         <NavLink
           className={({ isActive }) =>
-            `font-bold ${isActive ? "bg-blue-800 text-white hover:text-black" : "hover:text-blue-600"}`
+           `font-bold text-white  ${isActive ? "bg-white text-[#ff3c00] hover:text-white" : "hover:text-white "}`
           }
           to="/all-visas"
         >
@@ -43,7 +37,7 @@ const Navbar = () => {
       <li>
         <NavLink
           className={({ isActive }) =>
-            `font-bold ${isActive ? "bg-blue-800 text-white hover:text-black" : "hover:text-blue-600"}`
+         `font-bold text-white  ${isActive ? "bg-white text-[#ff3c00] hover:text-white" : "hover:text-white "}`
           }
           to="/add-visa"
         >
@@ -53,7 +47,7 @@ const Navbar = () => {
       <li>
         <NavLink
           className={({ isActive }) =>
-            `font-bold ${isActive ? "bg-blue-800 text-white hover:text-black" : "hover:text-blue-600"}`
+          `font-bold text-white ${isActive ? "bg-white text-[#ff3c00] hover:text-white" : "hover:text-white "}`
           }
           to="/my-added-visas"
         >
@@ -63,7 +57,7 @@ const Navbar = () => {
       <li>
         <NavLink
           className={({ isActive }) =>
-            `font-bold ${isActive ? "bg-blue-800 text-white hover:text-black" : "hover:text-blue-600"}`
+             `font-bold text-white ${isActive ? "bg-white text-[#ff3c00] hover:text-white" : "hover:text-white "}`
           }
           to="/my-visa-applications"
         >
@@ -79,7 +73,7 @@ const Navbar = () => {
   return (
     <>
 
-      <div className="bg-red-200 dark:bg-slate-100 shadow-md py-2">
+<div className={`shadow-md py-2 ${theme === "light" ? "bg-[#ff0000e1]" : "bg-gray-800"}`}>
         <div className="navbar container mx-auto">
           <div className="navbar-start">
             <div className="dropdown">
@@ -134,7 +128,7 @@ const Navbar = () => {
                 </div>
                 <button
                   onClick={handleLogout}
-                  className="btn bg-gradient-to-r from-blue-500 to-purple-500 text-white hover:shadow-lg hover:scale-105 transition-transform"
+                  className="btn bg-white text-[#ff3c00] hover:bg-[#ff3c00] hover:text-white hover:border-white hover:shadow-lg hover:scale-105 transition-transform"
                 >
                   Logout
                 </button>
@@ -142,12 +136,12 @@ const Navbar = () => {
             ) : (
               <div className="flex gap-3">
                 <NavLink to="/login">
-                  <button className="btn bg-gradient-to-r from-blue-500 to-purple-500 text-white hover:shadow-lg hover:scale-105 transition-transform">
+                  <button   className="btn bg-white text-[#ff3c00] hover:bg-[#ff3c00] hover:text-white hover:border-white hover:shadow-lg hover:scale-105 transition-transform">
                     Login
                   </button>
                 </NavLink>
                 <NavLink to="/register">
-                  <button className="btn bg-gradient-to-r from-blue-500 to-purple-500 text-white hover:shadow-lg hover:scale-105 transition-transform">
+                  <button   className="btn bg-white text-[#ff3c00] hover:bg-[#ff3c00] hover:text-white hover:border-white hover:shadow-lg hover:scale-105 transition-transform">
                     Register
                   </button>
                 </NavLink>

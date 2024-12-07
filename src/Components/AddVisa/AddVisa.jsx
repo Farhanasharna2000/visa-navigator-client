@@ -11,7 +11,7 @@ import { Helmet } from "react-helmet";
 const AddVisa = () => {
     const [startDate, setStartDate] = useState(new Date());
 
-    const{user}=useContext(authContext)
+    const { user } = useContext(authContext)
 
     const handleSubmit = e => {
         e.preventDefault()
@@ -37,7 +37,7 @@ const AddVisa = () => {
 
 
 
-        const newData = { image, name, visaType, processingTime, description, age, fee, validity, method, requiredDocuments,authUserEmail }
+        const newData = { image, name, visaType, processingTime, description, age, fee, validity, method, requiredDocuments, authUserEmail }
 
 
         fetch("https://visa-navigator-server-liart.vercel.app/visaData", {
@@ -62,145 +62,148 @@ const AddVisa = () => {
     return (
         <div>
             <Helmet>
-        <title>VisaZen | Add Visa</title>
-      </Helmet>
+                <title>visaZen | Add Visa</title>
+            </Helmet>
             <Navbar />
 
-            <div className="max-w-4xl mx-auto mt-10 p-6 bg-slate-100 rounded-lg shadow-md my-10">
+            <div className="max-w-4xl mx-auto mt-10 p-6 bg-slate-100 rounded-xl shadow-lg my-10">
                 <h1 className="text-2xl font-bold mb-5">Add Visa</h1>
                 <form onSubmit={handleSubmit}>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div >
-                        <label className="block font-bold">Country Image URL:</label>
-                        <input
-                            type="text"
-                            name="countryImage"
-                            className="w-full px-3 py-2 border rounded"
-                            placeholder="Enter image URL"
-                            required
-                        />
-                    </div>
-
-                    <div >
-                        <label className="block font-bold">Country Name:</label>
-                        <input
-                            type="text"
-                            name="countryName"
-                            className="w-full px-3 py-2 border rounded"
-                            required
-                        />
-                    </div>
-
-                    <div >
-                        <label className="block font-bold">Visa Type:</label>
-                        <select
-                            name="visaType"
-                            className="w-full px-3 py-2 border rounded"
-                        >
-                            <option selected>Select Visa Type</option>
-                            <option value="Tourist visa">Tourist visa</option>
-                            <option value="Student visa">Student visa</option>
-                            <option value="Residence visa">Residence visa</option>
-                            <option value="Business visa">Business visa</option>
-
-                        </select>
-                    </div>
-
-                    <div >
-                        <label className="block font-bold">Processing Time:</label>
-                        <input
-                            type="text"
-                            name="processingTime"
-                            className="w-full px-3 py-2 border rounded"
-                            required
-                        />
-                    </div>
-
-                    <div >
-                        <label className="block font-bold">Required Documents:</label>
-                        <div className="flex flex-wrap gap-2">
-                            <label>
-                                <input
-                                    type="checkbox"
-                                    name="requiredDocuments"
-                                    value="Valid passport"
-                                />{" "}
-                                Valid passport
-                            </label>
-                            <label>
-                                <input
-                                    type="checkbox"
-                                    name="requiredDocuments"
-                                    value="Visa application form"
-                                />{" "}
-                                Visa application form
-                            </label>
-                            <label>
-                                <input
-                                    type="checkbox"
-                                    name="requiredDocuments"
-                                    value="Recent passport-sized photograph"
-                                />{" "}
-                                Recent passport-sized photograph
-                            </label>
+                        <div >
+                            <label className="block font-bold">Country Image URL:</label>
+                            <input
+                                type="text"
+                                name="countryImage"
+                                className="w-full px-3 py-2 border rounded"
+                                placeholder="Enter image URL"
+                                required
+                            />
                         </div>
+
+                        <div >
+                            <label className="block font-bold">Country Name:</label>
+                            <input
+                                type="text"
+                                name="countryName"
+                                className="w-full px-3 py-2 border rounded"
+                                required
+                            />
+                        </div>
+
+                        <div >
+                            <label className="block font-bold">Visa Type:</label>
+                            <select
+                                name="visaType"
+                                className="w-full px-3 py-2 border rounded"
+                            >
+                                <option selected>Select Visa Type</option>
+                                <option value="Tourist visa">Tourist visa</option>
+                                <option value="Student visa">Student visa</option>
+                                <option value="Residence visa">Residence visa</option>
+                                <option value="Business visa">Business visa</option>
+
+                            </select>
+                        </div>
+
+                        <div >
+                            <label className="block font-bold">Processing Time:</label>
+                            <input
+                                type="text"
+                                name="processingTime"
+                                className="w-full px-3 py-2 border rounded"
+                                required
+                            />
+                        </div>
+
+                        <div >
+                            <label className="block font-bold">Required Documents:</label>
+                            <div className="flex flex-wrap gap-2">
+                                <label>
+                                    <input
+                                        type="checkbox"
+                                        name="requiredDocuments"
+                                        value="Valid passport"
+                                    />{" "}
+                                    Valid passport
+                                </label>
+                                <label>
+                                    <input
+                                        type="checkbox"
+                                        name="requiredDocuments"
+                                        value="Visa application form"
+                                    />{" "}
+                                    Visa application form
+                                </label>
+                                <label>
+                                    <input
+                                        type="checkbox"
+                                        name="requiredDocuments"
+                                        value="Recent passport-sized photograph"
+                                    />{" "}
+                                    Recent passport-sized photograph
+                                </label>
+                            </div>
+                        </div>
+
+                        <div >
+                            <label className="block font-bold">Description:</label>
+                            <textarea
+                                name="description"
+                                className="w-full px-3 py-2 border rounded"
+                                required
+                            ></textarea>
+                        </div>
+
+                        <div >
+                            <label className="block font-bold">Age Restriction:</label>
+                            <input
+                                type="number"
+                                name="ageRestriction"
+                                className="w-full px-3 py-2 border rounded"
+                            />
+                        </div>
+
+                        <div >
+                            <label className="block font-bold">Fee:</label>
+                            <input
+                                type="number"
+                                name="fee"
+                                className="w-full px-3 py-2 border rounded"
+                                required
+                            />
+                        </div>
+                        <div >
+                            <label className="block font-bold">Application Method:</label>
+                            <input
+                                type="text"
+                                name="applicationMethod"
+                                className="w-full px-3 py-2 border rounded"
+                                required
+                            />
+                        </div>
+                        <div className="mb-5 " >
+                            <label className="block font-bold">Validity:</label>
+                            <DatePicker
+                                className="input px-3 py-2 border rounded w-full"
+                                selected={startDate}
+                                onChange={(date) => setStartDate(date)}
+                            />
+                        </div>
+
+
                     </div>
 
-                    <div >
-                        <label className="block font-bold">Description:</label>
-                        <textarea
-                            name="description"
-                            className="w-full px-3 py-2 border rounded"
-                            required
-                        ></textarea>
+
+                    <div className="flex justify-end">
+                        <button
+                            type="submit"
+                            className="w-48 bg-[#ff0000e1] hover:bg-white hover:text-[#ff0000e1] text-white py-2 px-4 rounded"
+                        >
+                            Add Visa
+                        </button>
                     </div>
 
-                    <div >
-                        <label className="block font-bold">Age Restriction:</label>
-                        <input
-                            type="number"
-                            name="ageRestriction"
-                            className="w-full px-3 py-2 border rounded"
-                        />
-                    </div>
-
-                    <div >
-                        <label className="block font-bold">Fee:</label>
-                        <input
-                            type="number"
-                            name="fee"
-                            className="w-full px-3 py-2 border rounded"
-                            required
-                        />
-                    </div>
-                    <div >
-                        <label className="block font-bold">Application Method:</label>
-                        <input
-                            type="text"
-                            name="applicationMethod"
-                            className="w-full px-3 py-2 border rounded"
-                            required
-                        />
-                    </div>
-                    <div className="mb-5 " >
-                        <label className="block font-bold">Validity:</label>
-                        <DatePicker
-                            className="input px-3 py-2 border rounded w-full"
-                            selected={startDate}
-                            onChange={(date) => setStartDate(date)}
-                        />
-                    </div>
-
-                 
-                    </div>
-
-
-                    <button
-                        type="submit"
-                        className="w-full bg-blue-500 text-white py-2 px-4 rounded"
-                    >
-                        Add Visa
-                    </button>
                 </form>
             </div>
             <Footer />

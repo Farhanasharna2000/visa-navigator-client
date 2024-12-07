@@ -131,7 +131,7 @@ const MyAddedVisas = () => {
             </Helmet>
             <Navbar />
             <Tooltip id="my-tooltip" />
-            <div className="p-8">
+            <div className="p-8 container mx-auto ">
                 <h1 className="text-3xl font-bold text-center mb-8">My Added Visa</h1>
 
                 {loading ? (
@@ -143,8 +143,7 @@ const MyAddedVisas = () => {
                 ) : (
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                         {myAddedVisas.map((data) => (
-                            <div key={data._id} className="max-w-md bg-white shadow-lg rounded-lg p-8 border border-gray-200">
-                                <div className="flex">
+                            <div key={data._id} className="max-w-md bg-slate-100 shadow-lg rounded-lg p-5 border border-gray-200">
                                     <div >
                                         <div className="flex items-center space-x-4">
                                             <img src={data.image} alt="country" className="w-16 h-16 rounded-full object-cover" />
@@ -161,15 +160,14 @@ const MyAddedVisas = () => {
                                             <p><span className="font-semibold">Application Method:</span> {data.method}</p>
                                         </div>
                                     </div>
-                                    <div className="flex flex-col gap-3">
-                                        <button data-tooltip-id="my-tooltip" data-tooltip-content="Edit" className="btn text-xl" onClick={() => openUpdateModal(data)}>
+                                    <div className="flex justify-center mt-4 gap-3">
+                                        <button data-tooltip-id="my-tooltip" data-tooltip-content="Edit" className="btn hover:bg-black bg-green-700 text-white text-xl" onClick={() => openUpdateModal(data)}>
                                             <MdOutlineModeEditOutline />
                                         </button>
-                                        <button data-tooltip-id="my-tooltip" data-tooltip-content="Delete" onClick={() => handleDelete(data._id)} className="btn text-xl">
+                                        <button data-tooltip-id="my-tooltip" data-tooltip-content="Delete" onClick={() => handleDelete(data._id)} className="btn text-xl bg-red-600 hover:bg-black text-white">
                                             <MdDeleteForever />
                                         </button>
                                     </div>
-                                </div>
                             </div>
                         ))}
                     </div>
@@ -252,13 +250,13 @@ const MyAddedVisas = () => {
                                 <button
                                     type="button"
                                     onClick={() => setIsModalOpen(false)}
-                                    className="bg-gray-300 text-white px-4 py-2 rounded">
+                                    className="bg-red-600 hover:bg-black text-white px-4 py-2 rounded">
                                     Cancel
                                 </button>
                                 <button
 
                                     type="submit"
-                                    className="bg-blue-500 text-white px-4 py-2 rounded">
+                                    className=" hover:bg-black bg-green-700 text-white px-4 py-2 rounded">
                                     Update Visa
                                 </button>
                             </div>

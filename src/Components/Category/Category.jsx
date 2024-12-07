@@ -6,7 +6,7 @@ import svg4 from "../../assets/residence.svg"
 
 const Category = () => {
     return (
-        <section className="py-12 bg-gray-50 my-8">
+        <section className="py-12 bg-slate-100 my-8 rounded-xl">
         <div className="max-w-6xl mx-auto text-center">
           <h2 className="text-xl font-semibold text-red-500 uppercase mb-4">
             Our Visa Categories
@@ -15,7 +15,7 @@ const Category = () => {
             We Offer Citizenship & Immigration Services
           </h1>
           <div className="grid gap-8 grid-cols-1 md:grid-cols-4 sm:grid-cols-2">
-            <div className="bg-white shadow-lg rounded-lg p-6 text-center">
+            <div className="bg-white shadow-lg rounded-lg p-6 text-center  hover:shadow-xl transition-transform transform hover:scale-105">
               <div className="mb-4">
                 <div className="bg-red-500 p-4 inline-block rounded-full">
                   <img
@@ -30,7 +30,7 @@ const Category = () => {
               Visit new places to discover with a Tourist Visa. We deliver your documents ...
               </p>
             </div>
-            <div className="bg-white shadow-lg rounded-lg p-6 text-center">
+            <div className="bg-white shadow-lg rounded-lg p-6 text-center hover:shadow-xl transition-transform transform hover:scale-105">
               <div className="mb-4">
                 <div className="bg-red-500 p-4 inline-block rounded-full">
                   <img
@@ -47,7 +47,7 @@ const Category = () => {
             </div>
         
   
-            <div className="bg-white shadow-lg rounded-lg p-6 text-center">
+            <div className="bg-white shadow-lg rounded-lg p-6 text-center hover:shadow-xl transition-transform transform hover:scale-105">
               <div className="mb-4">
                 <div className="bg-red-500 p-4 inline-block rounded-full">
                   <img
@@ -63,7 +63,7 @@ const Category = () => {
               </p>
             </div>
   
-            <div className="bg-white shadow-lg rounded-lg p-6 text-center">
+            <div className="bg-white shadow-lg rounded-lg p-6 text-center hover:shadow-xl transition-transform transform hover:scale-105">
               <div className="mb-4">
                 <div className="bg-red-500 p-4 inline-block rounded-full">
                   <img

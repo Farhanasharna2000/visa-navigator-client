@@ -3,7 +3,6 @@ import Footer from "../Footer/Footer";
 import Navbar from "../Navbar/Navbar";
 import { Helmet } from "react-helmet";
 import { useState } from "react";
-
 const AllVisas = () => {
   const visas = useLoaderData();
   const [selectedVisaType, setSelectedVisaType] = useState("");
@@ -15,7 +14,7 @@ const AllVisas = () => {
     setSelectedVisaType(visaType);
 
     if (visaType) {
-      fetch(`https://visa-navigator-server-liart.vercel.app/selectedVisa?visaType=${visaType}`, {
+      fetch(`http://localhost:3000/selectedVisa?visaType=${visaType}`, {
         headers: {
           "Content-Type": "application/json",
         },
@@ -35,15 +34,15 @@ const AllVisas = () => {
   return (
     <div>
       <Helmet>
-        <title>VisaZen | All Visas</title>
+        <title>visaZen | All Visas</title>
       </Helmet>
       <Navbar />
-      <div className="p-8">
-        <h1 className="text-3xl font-bold text-center mb-8">All Visas</h1>
+      <div className="container mx-auto p-8">
+        <h1 className="text-3xl font-bold text-center mb-8 ">Find the Perfect Visa for You</h1>
         <select
           onChange={handleSelect}
           value={selectedVisaType}
-          className="select select-bordered w-full max-w-xs mb-8"
+          className="select select-bordered bg-[#111A3A] text-white max-w-sm mb-8"
         >
           <option selected>
             Select visa type
@@ -55,11 +54,11 @@ const AllVisas = () => {
         </select>
         { selectedVisa.length === 0 ?
                             <p className="text-center text-xl text-red-500 py-10">No data found</p> :
-        (<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        (<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 ">
           {selectedVisa.map((visa) => (
             <div
               key={visa._id}
-              className="border border-gray-200 rounded-lg shadow-md p-4 bg-white flex flex-col"
+              className="border border-gray-200 rounded-lg  p-4 bg-slate-100 flex flex-col shadow-md hover:shadow-xl transition-transform transform hover:scale-105"
             >
               <div className="flex-grow">
                 <img
@@ -67,19 +66,21 @@ const AllVisas = () => {
                   alt={visa.name}
                   className="w-full h-40 object-cover rounded-t-lg"
                 />
-                <h2 className="text-xl font-semibold mt-4">{visa.name}</h2>
-                <p className="text-gray-500 text-sm">Type : {visa.visaType}</p>
-                <p className="text-gray-500 text-sm">
-                  Processing Time : {visa.processingTime}
+                <h2 className="text-xl font-bold my-3">{visa.name}</h2>
+                <div className="space-y-1">
+                <p ><span className="font-semibold">Type :</span> {visa.visaType}</p>
+                <p ><span className="font-semibold">Processing Time : </span>
+                 {visa.processingTime}
                 </p>
-                <p className="text-gray-700 mt-2">Validity : {visa.validity}</p>
-                <p className="text-gray-700 mt-2">Application Method : {visa.method}</p>
-                <p className="text-green-600 font-bold mt-2">Fee: {visa.fee}</p>
+                <p ><span className="font-semibold">Validity :</span> {visa.validity}</p>
+                <p ><span className="font-semibold">Application Method :</span> {visa.method}</p>
+                <p className="text-[#ff0000e1] font-bold ">Fee: {visa.fee}</p>
+                </div>
               </div>
 
               <Link to={`/visa-details/${visa._id}`} className="block">
                 <div>
-                  <button className="mt-4 w-full bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">
+                  <button className="mt-4 font-bold w-full bg-[#111A3A] hover:bg-white hover:text-[#111A3A] text-white py-2 px-4 rounded ">
                     See Details
                   </button>
                 </div>

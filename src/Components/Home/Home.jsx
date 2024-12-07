@@ -15,8 +15,8 @@ const Home = () => {
       <Banner />
       <LatestVisas  />
       <VisaProcess/>
-      <Team/>
       <Category/>
+      <Team/>
     </div>
   );
 };
