@@ -14,7 +14,7 @@ const VisaProcess = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-r from-blue-100 to-indigo-300 p-8 rounded-xl mb-8">
+    <div className="min-h-screen bg-gradient-to-r from-blue-100 to-indigo-300 p-8 rounded-xl mb-8 container mx-auto">
       <div className="flex justify-center mt-10">
         <Lottie options={lottieOptions} height={300} width={300} />
       </div>

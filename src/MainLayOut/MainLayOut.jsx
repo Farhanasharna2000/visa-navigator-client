@@ -21,7 +21,7 @@ const MainLayOut = () => {
           <title>VisaZen</title>
         </Helmet>
         <Navbar theme={theme} setTheme={setTheme} />
-        <div className="container mx-auto">
+        <div >
           <Outlet />
         </div>
         <Footer theme={theme} />

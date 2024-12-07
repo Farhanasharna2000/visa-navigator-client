@@ -8,7 +8,7 @@ import Category from "../Category/Category";
 const Home = () => {
   
   return (
-    <div className="mt-3">
+    <div >
        <Helmet>
         <title>VisaZen | Home</title>
       </Helmet>

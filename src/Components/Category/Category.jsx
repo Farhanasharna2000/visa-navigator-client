@@ -11,7 +11,7 @@ const Category = () => {
           <h2 className="text-xl font-semibold text-red-500 uppercase mb-4">
             Our Visa Categories
           </h2>
-          <h1 className="text-3xl font-bold mb-8">
+          <h1 className="text-4xl font-bold mb-8">
             We Offer Citizenship & Immigration Services
           </h1>
           <div className="grid gap-8 grid-cols-1 md:grid-cols-4 sm:grid-cols-2">
