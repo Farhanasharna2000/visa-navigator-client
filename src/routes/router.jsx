@@ -27,9 +27,8 @@ const router = createBrowserRouter([
   },
   {
     path: "/all-visas",
-    element: <PrivateRoute>
-      <AllVisas />
-    </PrivateRoute>,
+    element: 
+      <AllVisas />,
     loader: () => fetch("https://visa-navigator-server-liart.vercel.app/visaData")
   },
   {
