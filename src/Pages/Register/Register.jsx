@@ -115,7 +115,7 @@ const Register = () => {
                 </div>
 
             </div>
-            <Footer/>
+            <Footer />
         </>
 
     );

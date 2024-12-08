@@ -1,7 +1,7 @@
 
 import { Typewriter } from "react-simple-typewriter";
 import Lottie from "react-lottie";
-import animationData from "../../animations/Animation - 1733475693064.json"; 
+import animationData from "../../animations/Animation - 1733475693064.json";
 
 const VisaProcess = () => {
   const lottieOptions = {

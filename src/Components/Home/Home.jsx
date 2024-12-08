@@ -6,17 +6,17 @@ import Team from "../Team/Team";
 import Category from "../Category/Category";
 
 const Home = () => {
-  
+
   return (
     <div >
-       <Helmet>
+      <Helmet>
         <title>VisaZen | Home</title>
       </Helmet>
       <Banner />
-      <LatestVisas  />
-      <VisaProcess/>
-      <Category/>
-      <Team/>
+      <LatestVisas />
+      <VisaProcess />
+      <Category />
+      <Team />
     </div>
   );
 };

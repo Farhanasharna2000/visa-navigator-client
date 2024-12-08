@@ -1,4 +1,4 @@
-import { useContext} from "react";
+import { useContext } from "react";
 import { NavLink } from "react-router-dom";
 import { authContext } from "../AuthProvider/AuthProvider";
 import logo from "../../assets/logo1.png"
@@ -27,7 +27,7 @@ const Navbar = () => {
       <li>
         <NavLink
           className={({ isActive }) =>
-           `font-bold   ${isActive ? "bg-white text-[#ff3c00] hover:text-white" : "hover:text-white text-white"}`
+            `font-bold   ${isActive ? "bg-white text-[#ff3c00] hover:text-white" : "hover:text-white text-white"}`
           }
           to="/all-visas"
         >
@@ -37,7 +37,7 @@ const Navbar = () => {
       <li>
         <NavLink
           className={({ isActive }) =>
-         `font-bold   ${isActive ? "bg-white text-[#ff3c00] hover:text-white" : "hover:text-white text-white"}`
+            `font-bold   ${isActive ? "bg-white text-[#ff3c00] hover:text-white" : "hover:text-white text-white"}`
           }
           to="/add-visa"
         >
@@ -47,7 +47,7 @@ const Navbar = () => {
       <li>
         <NavLink
           className={({ isActive }) =>
-          `font-bold  ${isActive ? "bg-white text-[#ff3c00] hover:text-white" : "hover:text-white text-white"}`
+            `font-bold  ${isActive ? "bg-white text-[#ff3c00] hover:text-white" : "hover:text-white text-white"}`
           }
           to="/my-added-visas"
         >
@@ -57,7 +57,7 @@ const Navbar = () => {
       <li>
         <NavLink
           className={({ isActive }) =>
-             `font-bold  ${isActive ? "bg-white text-[#ff3c00] hover:text-white" : "hover:text-white text-white"}`
+            `font-bold  ${isActive ? "bg-white text-[#ff3c00] hover:text-white" : "hover:text-white text-white"}`
           }
           to="/my-visa-applications"
         >
@@ -73,7 +73,7 @@ const Navbar = () => {
   return (
     <>
 
-<div className={`shadow-md py-2 ${theme === "light" ? "bg-[#ff0000e1]" : "bg-gray-800"}`}>
+      <div className={`shadow-md py-2 ${theme === "light" ? "bg-[#ff0000e1]" : "bg-gray-800"}`}>
         <div className="navbar container mx-auto">
           <div className="navbar-start">
             <div className="dropdown">
@@ -95,7 +95,7 @@ const Navbar = () => {
               </div>
               <ul
                 tabIndex={0}
-                className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
+                className="menu menu-sm dropdown-content bg-[#ff3c00] rounded-box z-[1] mt-3 w-52 p-2 shadow"
               >
                 {links}
               </ul>
@@ -103,7 +103,7 @@ const Navbar = () => {
             <img className="w-64 h-20" src={logo} alt="" />
           </div>
           <div className="navbar-center hidden lg:flex ">
-            <ul className="menu menu-horizontal px-1">{links}</ul>
+            <ul className="menu menu-horizontal px-1 ">{links}</ul>
           </div>
           <div className="navbar-end">
             {user?.email ? (
@@ -136,12 +136,12 @@ const Navbar = () => {
             ) : (
               <div className="flex gap-3">
                 <NavLink to="/login">
-                  <button   className="btn bg-white text-[#ff3c00] hover:bg-[#ff3c00] hover:text-white hover:border-white hover:shadow-lg hover:scale-105 transition-transform">
+                  <button className="btn bg-white text-[#ff3c00] hover:bg-[#ff3c00] hover:text-white hover:border-white hover:shadow-lg hover:scale-105 transition-transform">
                     Login
                   </button>
                 </NavLink>
                 <NavLink to="/register">
-                  <button   className="btn bg-white text-[#ff3c00] hover:bg-[#ff3c00] hover:text-white hover:border-white hover:shadow-lg hover:scale-105 transition-transform">
+                  <button className="btn bg-white text-[#ff3c00] hover:bg-[#ff3c00] hover:text-white hover:border-white hover:shadow-lg hover:scale-105 transition-transform">
                     Register
                   </button>
                 </NavLink>

@@ -14,12 +14,11 @@ const MyAddedVisas = () => {
     const [error, setError] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [visaToUpdate, setVisaToUpdate] = useState(null);
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                setLoading(true);
                 if (!user?.email) {
                     setLoading(false);
                     return;
@@ -41,11 +40,16 @@ const MyAddedVisas = () => {
                 }
 
                 const data = await response.json();
+
                 setMyAddedVisas(data);
+                setLoading(false);
+
             } catch (error) {
                 setError("An error occurred while fetching data", error);
+                setLoading(false);
+
             } finally {
-                setLoading(false); 
+                setLoading(false);
             }
         };
 
@@ -138,36 +142,36 @@ const MyAddedVisas = () => {
                     <span className="loading loading-bars loading-lg mx-auto block py-40 "></span>
                 ) : error ? (
                     <p className="text-center text-xl text-red-500 py-10">{error}</p>
-                ) : myAddedVisas.length === 0 ? (
+                ) : myAddedVisas.length < 1 ? (
                     <p className="text-center text-xl text-red-500 py-10">No data found</p>
                 ) : (
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                         {myAddedVisas.map((data) => (
                             <div key={data._id} className="max-w-md bg-slate-100 shadow-lg rounded-lg p-5 border border-gray-200">
-                                    <div >
-                                        <div className="flex items-center space-x-4">
-                                            <img src={data.image} alt="country" className="w-16 h-16 rounded-full object-cover" />
-                                            <div>
-                                                <h2 className="text-lg font-bold">{data.name}</h2>
-                                                <p className="text-sm text-gray-500">{data.visaType}</p>
-                                            </div>
+                                <div >
+                                    <div className="flex items-center space-x-4">
+                                        <img src={data.image} alt="country" className="w-16 h-16 rounded-full object-cover" />
+                                        <div>
+                                            <h2 className="text-lg font-bold">{data.name}</h2>
+                                            <p className="text-sm text-gray-500">{data.visaType}</p>
                                         </div>
+                                    </div>
 
-                                        <div className="mt-4 space-y-2">
-                                            <p><span className="font-semibold">Processing Time:</span> {data.processingTime}</p>
-                                            <p><span className="font-semibold">Fee:</span> ${data.fee}</p>
-                                            <p><span className="font-semibold">Validity:</span> {data.validity}</p>
-                                            <p><span className="font-semibold">Application Method:</span> {data.method}</p>
-                                        </div>
+                                    <div className="mt-4 space-y-2">
+                                        <p><span className="font-semibold">Processing Time:</span> {data.processingTime}</p>
+                                        <p><span className="font-semibold">Fee:</span> ${data.fee}</p>
+                                        <p><span className="font-semibold">Validity:</span> {data.validity}</p>
+                                        <p><span className="font-semibold">Application Method:</span> {data.method}</p>
                                     </div>
-                                    <div className="flex justify-center mt-4 gap-3">
-                                        <button data-tooltip-id="my-tooltip" data-tooltip-content="Edit" className="btn hover:bg-black bg-green-700 text-white text-xl" onClick={() => openUpdateModal(data)}>
-                                            <MdOutlineModeEditOutline />
-                                        </button>
-                                        <button data-tooltip-id="my-tooltip" data-tooltip-content="Delete" onClick={() => handleDelete(data._id)} className="btn text-xl bg-red-600 hover:bg-black text-white">
-                                            <MdDeleteForever />
-                                        </button>
-                                    </div>
+                                </div>
+                                <div className="flex justify-center mt-4 gap-3">
+                                    <button data-tooltip-id="my-tooltip" data-tooltip-content="Edit" className="btn hover:bg-black bg-green-700 text-white text-xl" onClick={() => openUpdateModal(data)}>
+                                        <MdOutlineModeEditOutline />
+                                    </button>
+                                    <button data-tooltip-id="my-tooltip" data-tooltip-content="Delete" onClick={() => handleDelete(data._id)} className="btn text-xl bg-red-600 hover:bg-black text-white">
+                                        <MdDeleteForever />
+                                    </button>
+                                </div>
                             </div>
                         ))}
                     </div>

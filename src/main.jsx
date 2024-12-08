@@ -9,13 +9,13 @@ import { ThemeProvider } from './Components/ThemeContext/ThemeContext'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-   <AuthProvider>
+    <AuthProvider>
 
-<ThemeProvider>
-<RouterProvider router={router} />
-<Toaster />
-</ThemeProvider>
+      <ThemeProvider>
+        <RouterProvider router={router} />
+        <Toaster />
+      </ThemeProvider>
 
-</AuthProvider>
+    </AuthProvider>
   </StrictMode>,
 )

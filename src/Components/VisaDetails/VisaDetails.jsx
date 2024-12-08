@@ -8,7 +8,10 @@ import Swal from "sweetalert2";
 import Lottie from "react-lottie";
 import animationData from '../../animations/Animation - 1733596091594.json'
 import { LuPhoneCall } from "react-icons/lu";
+import { Helmet } from "react-helmet";
+
 const VisaDetails = () => {
+
     const { id } = useParams();
     const { user } = useContext(authContext);
 
@@ -103,9 +106,12 @@ const VisaDetails = () => {
 
     return (
         <div >
+            <Helmet>
+                <title>VisaZen | Visa Details</title>
+            </Helmet>
             <Navbar />
             <div className=" container mx-auto ">
-                <div className="flex gap-5 ">
+                <div className="lg:flex gap-5 ">
                     <div className="mt-6">
                         <div className="flex justify-center ">
                             <Lottie options={lottieOptions} height={300} width={300} />
@@ -126,7 +132,7 @@ const VisaDetails = () => {
                             {visaDetails.visaType} | {visaDetails.name}
                         </h2>
                         <p className=" mb-4">
-                             {visaDetails.description}
+                            {visaDetails.description}
                         </p>
                         <p className=" mb-2">
                             <strong>Processing Time:</strong> {visaDetails.processingTime}
@@ -140,7 +146,7 @@ const VisaDetails = () => {
                         <p className=" mb-2">
                             <strong>Application Method:</strong> {visaDetails.method}
                         </p>
-                       
+
                         <p className=" mb-4">
                             <strong>Age:</strong> {visaDetails.age} years
                         </p>

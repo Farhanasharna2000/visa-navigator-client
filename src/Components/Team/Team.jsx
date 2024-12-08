@@ -1,5 +1,4 @@
 
-import { FaShareAlt } from 'react-icons/fa';
 import img1 from '../../assets/img.avif'
 import img2 from '../../assets/img2.jpg'
 import img3 from '../../assets/img3.avif'
@@ -24,7 +23,7 @@ const Team = () => {
                         <h2 className="text-xl font-semibold text-center">Bilal Abbas</h2>
                         <p className="text-center text-blue-800">Migration Agent</p>
                     </div>
-                    
+
                 </div>
                 <div className=' mb-8 md:mb-0'>
                     <div>
@@ -35,7 +34,7 @@ const Team = () => {
                         <h2 className="text-xl font-semibold text-center">Zara Sehgal</h2>
                         <p className="text-center text-blue-800">Migration Agent</p>
                     </div>
-                   
+
                 </div>
                 <div className=' mb-8 md:mb-0'>
                     <div>
@@ -46,7 +45,7 @@ const Team = () => {
                         <h2 className="text-xl font-semibold text-center">Avinash Roy</h2>
                         <p className="text-center text-blue-800">Migration Agent</p>
                     </div>
-                    
+
                 </div>
                 <div className=' mb-8 md:mb-0'>
                     <div>
@@ -57,15 +56,10 @@ const Team = () => {
                         <h2 className="text-xl font-semibold text-center">Esha Khan</h2>
                         <p className="text-center text-blue-800">Migration Agent</p>
                     </div>
-                    
-                </div>
 
-                
-             
+                </div>
             </div>
             <div>
-
-
             </div>
 
         </div>

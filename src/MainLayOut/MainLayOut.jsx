@@ -15,7 +15,7 @@ const MainLayOut = () => {
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
 
   return (
-    <ThemeProvider> 
+    <ThemeProvider>
       <div className="font-poppins">
         <Helmet>
           <title>VisaZen</title>

@@ -17,7 +17,6 @@ const AddVisa = () => {
         e.preventDefault()
 
         const form = e.target;
-
         const image = form.countryImage.value;
         const name = form.countryName.value;
         const visaType = form.visaType.value;
@@ -35,8 +34,6 @@ const AddVisa = () => {
         ).map(input => input.value);
 
 
-
-
         const newData = { image, name, visaType, processingTime, description, age, fee, validity, method, requiredDocuments, authUserEmail }
 
 
@@ -49,10 +46,9 @@ const AddVisa = () => {
         })
             .then(res => res.json())
             .then(data => {
-                console.log(data);
 
                 if (data.insertedId) {
-                    Swal.fire('Data create successfully')
+                    Swal.fire('Visa added successfully')
                     form.reset();
                     setStartDate(new Date());
                 }

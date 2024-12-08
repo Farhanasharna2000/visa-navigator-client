@@ -112,7 +112,7 @@ const Login = () => {
           <p className="text-center font-semibold">Don’t Have An Account ? <Link className="text-[#F75B5F]" to="/pages/register">Register</Link></p>
         </div>
       </div>
-      <Footer/>
+      <Footer />
     </>
   );
 };
